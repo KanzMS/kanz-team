@@ -1,0 +1,53 @@
+/* The tokens this site uses, copied by name and value from MokhbirPro's
+   Radar/frontend/src/styles/tokens.css (dark palette). A new colour is added
+   here, never hard-coded in a component. */
+:root {
+  --surface: #10141a;
+  --surface-dim: #0b0e13;
+  --surface-cont-low: #181c22;
+  --surface-cont-mid: #1f242c;
+  --surface-cont-high: #262a31;
+  --on-surface: #f0f2f5;
+  --secondary: #fcba59;
+  --secondary-hover: #fdca7d;
+  --secondary-glow: rgba(252, 186, 89, 0.12);
+  --gold-ink: #fcba59;
+  --gold-border: rgba(252, 186, 89, 0.25);
+  --on-secondary: #291800;
+  --error: #ffb4ab;
+  --red-border: rgba(239, 68, 68, 0.25);
+  --bear-bg: rgba(239, 68, 68, 0.1);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-medium: rgba(255, 255, 255, 0.15);
+  --border-hover: rgba(255, 255, 255, 0.24);
+  --text-high: #fff;
+  --text-mid: rgba(255, 255, 255, 0.9);
+  --text-low: rgba(255, 255, 255, 0.6);
+  --fill-subtle: rgba(255, 255, 255, 0.03);
+  --hd-fill: oklch(0.205 0 0 / 0.4);
+  --hd-border: oklch(1 0 0 / 0.18);
+  --hd-inset: inset 0 1px 0 oklch(1 0 0 / 0.16), inset 0 -1px 0 oklch(0 0 0 / 0.08);
+  --hd-shadow: 0 16px 40px -8px oklch(0 0 0 / 0.55), 0 4px 10px -3px oklch(0 0 0 / 0.35);
+  --scrollbar-thumb: rgba(255, 255, 255, 0.32);
+  --scrollbar-track: transparent;
+
+  --canvas: var(--surface-dim);
+  --ambient-pool: var(--surface);
+  --ambient-pool-soft: color-mix(in oklch, var(--surface) 86%, var(--surface-dim));
+  --ambient-warm: rgba(252, 186, 89, 0.07);
+  --ambient-dot: rgba(255, 255, 255, 0.072);
+  --grain-opacity: 0.034;
+
+  --page-max-w: 1680px;
+  --page-px: clamp(16px, 3vw, 40px);
+
+  --ease-out: cubic-bezier(0.2, 0, 0, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.36, 0.64, 1);
+  --motion-quick: 150ms;
+  --motion-fast: 250ms;
+
+  /* This site's own: the paper an asset is previewed on. Light is for a dark
+     mark and dark for a light one, so no logo disappears into its tile. */
+  --preview-light: #f8f9fb;
+  --preview-dark: #0b0e13;
+}
