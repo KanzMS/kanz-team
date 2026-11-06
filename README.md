@@ -1,29 +1,28 @@
 # Kanz team
 
-An internal site for the Kanz team: a library of logos and designs that copy on click, and the brand docs. FastAPI backend, React frontend, MokhbirPro's design system.
+A site for the Kanz team: a library of logos and designs that copy on click, and the brand docs. A static React site, deployed to GitHub Pages from the `dev` branch, using MokhbirPro's design system.
+
+**The site is public.** There is no sign-in, so anyone with the URL can read everything in `content/`. Don't add anything that isn't OK to share.
 
 ## Run it
 
 ```bash
-cp .env.example .env          # set TEAM_PASSWORD and SESSION_SECRET (skip if .env exists)
-
-cd frontend && npm install && npm run build && cd ..
-cd backend && uv run uvicorn app.main:app --port 8000
+cd frontend && npm install && npm run dev
 ```
 
-Open http://localhost:8000.
+Open http://localhost:5173/kanz-team/.
 
-For frontend work, run the backend as above with `--reload` and `npm run dev` in `frontend/`, then open http://localhost:5173.
+To check the production build, run `npm run build && npm run preview` in `frontend/`.
 
-## Sign-in
+## Deploy
 
-There is one shared account, set by `TEAM_USERNAME` and `TEAM_PASSWORD` in `.env`. Sessions last 7 days. To remove someone's access, change the password and `SESSION_SECRET`, then restart.
+Every push to `dev` builds the site and publishes it to https://kanzms.github.io/kanz-team/ through `.github/workflows/pages.yml`.
 
-Over https, set `COOKIE_SECURE=true`.
+The site is served from a subfolder named after the repository. If the repository is renamed, change `base` in `frontend/vite.config.ts`.
 
 ## Add content
 
-No code or restart needed.
+Add the file to `content/` and push to `dev`. When running locally, restart `npm run dev` to pick it up.
 
 - **Logos and designs:** put a PNG, JPG, WebP or SVG in `content/assets/<Category>/`. The folder is the section title and the filename is the name (`kanz-logo-white.png` shows as "Kanz logo white").
 - **Docs:** put a Markdown file in `content/docs/`, named in lowercase with hyphens:
@@ -40,9 +39,3 @@ No code or restart needed.
 ## Copying
 
 Click-to-copy needs https or localhost, because browsers block clipboard images on plain http. Everything is copied as a PNG; SVGs are rasterised at 2048px on the longest side.
-
-## Tests
-
-```bash
-cd backend && uv run pytest
-```

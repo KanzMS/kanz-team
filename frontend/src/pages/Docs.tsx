@@ -18,7 +18,7 @@ function downloadDoc({ slug, title, body }: Doc) {
 }
 
 function DocBody({ slug }: { slug: string }) {
-  const doc = useApi<Doc>(`/api/docs/${encodeURIComponent(slug)}`);
+  const doc = useApi<Doc>(`docs/${encodeURIComponent(slug)}.json`);
 
   if (doc.status === "error") return <ErrorState error={doc.error} retry={doc.retry} />;
   if (doc.status === "loading") {
@@ -61,7 +61,7 @@ function DocBody({ slug }: { slug: string }) {
 
 export function DocsPage() {
   const { slug } = useParams();
-  const docs = useApi<DocMeta[]>("/api/docs");
+  const docs = useApi<DocMeta[]>("docs.json");
   const list = useRef<HTMLElement>(null);
 
   // On a phone the list is one sideways row: keep the open document's pill in view.

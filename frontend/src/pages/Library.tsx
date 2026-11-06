@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { EmptyState, ErrorState, Icon } from "../components";
-import { useApi, useApiFetch } from "../lib/api";
+import { fetchContent, useApi } from "../lib/api";
 import { copyImage, prepareImage, saveFile, type PreparedImage } from "../lib/image";
 
 const COPIED_MS = 1800;
@@ -23,7 +23,6 @@ function formatSize(bytes: number): string {
 }
 
 function usePreparedImage(path: string) {
-  const apiFetch = useApiFetch();
   const [state, setState] = useState<"loading" | "error" | PreparedImage>("loading");
 
   useEffect(() => {
@@ -31,7 +30,7 @@ function usePreparedImage(path: string) {
     let url: string | undefined;
     setState("loading");
     const encoded = path.split("/").map(encodeURIComponent).join("/");
-    apiFetch(`/api/assets/file/${encoded}`)
+    fetchContent(`assets/${encoded}`)
       .then((response) => response.blob())
       .then(prepareImage)
       .then((prepared) => {
@@ -46,7 +45,7 @@ function usePreparedImage(path: string) {
       stale = true;
       if (url) URL.revokeObjectURL(url);
     };
-  }, [apiFetch, path]);
+  }, [path]);
 
   return state;
 }
@@ -178,7 +177,7 @@ function SkeletonGrid() {
 }
 
 export function LibraryPage() {
-  const assets = useApi<Asset[]>("/api/assets");
+  const assets = useApi<Asset[]>("assets.json");
   const [copyFailed, setCopyFailed] = useState(false);
   const toastTimer = useRef<number | undefined>(undefined);
 

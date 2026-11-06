@@ -146,17 +146,12 @@ p { text-wrap: pretty; }
 .nav-link:hover { color: var(--text-high); background: var(--fill-subtle); }
 .nav-link[aria-current="page"] { color: var(--gold-ink); background: var(--secondary-glow); }
 .nav-link[aria-current="page"] .material-symbols-outlined { font-variation-settings: "FILL" 1; }
-.header-end { margin-inline-start: auto; display: flex; align-items: center; flex-shrink: 0; }
 
 @media (max-width: 420px) {
   .header-pill { padding-inline: 8px; gap: 4px; }
   .brand { margin-inline-end: 2px; }
   .nav-link { padding-inline: 10px; font-size: 13px; }
   .nav-link .material-symbols-outlined { display: none; }
-  /* Sign out alone keeps its icon: it gives up its word so the pill fits at 320px. */
-  .header-end .nav-link { padding-inline: 8px; }
-  .header-end .nav-link .material-symbols-outlined { display: inline-block; }
-  .nav-link-word { display: none; }
 }
 
 /* ── Pills and states ───────────────────────────────────────────────────── */
@@ -471,66 +466,3 @@ p { text-wrap: pretty; }
   .docs-link-summary { display: none; }
   .docs-link-title { white-space: nowrap; }
 }
-
-/* ── Sign in ────────────────────────────────────────────────────────────── */
-.auth {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  padding: 32px 16px;
-  text-align: center;
-}
-.auth-logo { display: block; width: 88px; height: 88px; }
-.auth-title { font-size: 26px; font-weight: 800; letter-spacing: -0.02em; color: var(--text-high); }
-.auth-sub { margin-block-start: 4px; font-size: 15px; color: var(--text-low); }
-
-.auth-form {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  width: min(100%, 360px);
-  padding: 24px;
-  background: var(--surface);
-  border: 1px solid var(--border-medium);
-  border-radius: 12px;
-  text-align: start;
-}
-.field { display: flex; flex-direction: column; gap: 6px; }
-.field-label { font-size: 13px; font-weight: 500; color: var(--text-mid); }
-.field-input {
-  min-height: 44px;
-  padding-inline: 12px;
-  background: var(--surface-cont-low);
-  border: 1px solid var(--border-medium);
-  border-radius: 8px;
-  font: inherit;
-  font-size: 16px;
-  color: var(--text-high);
-}
-.field-input:hover { border-color: var(--border-hover); }
-.auth-error {
-  display: flex;
-  gap: 8px;
-  padding: 10px 12px;
-  background: var(--bear-bg);
-  border: 1px solid var(--red-border);
-  border-radius: 8px;
-  font-size: 13px;
-  line-height: 1.4;
-  color: var(--text-high);
-}
-.auth-error .material-symbols-outlined { color: var(--error); }
-.btn-primary {
-  min-height: 44px;
-  border-radius: 999px;
-  background: var(--secondary);
-  color: var(--on-secondary);
-  font-size: 15px;
-  font-weight: 600;
-  transition: background-color var(--motion-quick) var(--ease-out);
-}
-.btn-primary:hover:not(:disabled) { background: var(--secondary-hover); }
-.btn-primary:disabled { opacity: 0.6; cursor: default; }

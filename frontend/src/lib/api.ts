@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState } from "react";
-import { useAuth } from "./auth";
 
 export class ApiError extends Error {
   constructor(
@@ -10,26 +9,22 @@ export class ApiError extends Error {
   }
 }
 
-/** A fetch to our API. The session cookie goes along by itself; a 401 ends the session here too. */
-export function useApiFetch() {
-  const { sessionEnded } = useAuth();
-  return useCallback(
-    async (path: string): Promise<Response> => {
-      let response: Response;
-      try {
-        response = await fetch(path);
-      } catch {
-        throw new ApiError(0, "Could not reach the server. Check your connection and try again.");
-      }
-      if (response.status === 401) sessionEnded();
-      if (!response.ok) {
-        const body = await response.json().catch(() => null);
-        throw new ApiError(response.status, body?.detail ?? "Something went wrong. Try again.");
-      }
-      return response;
-    },
-    [sessionEnded],
-  );
+/** A URL under the site's base path, which is a subfolder on GitHub Pages. */
+export function siteUrl(path: string): string {
+  return `${import.meta.env.BASE_URL}${path}`;
+}
+
+/** Fetches a file the build generated from `content/`. */
+export async function fetchContent(path: string): Promise<Response> {
+  let response: Response;
+  try {
+    response = await fetch(siteUrl(`content/${path}`));
+  } catch {
+    throw new ApiError(0, "Could not reach the site. Check your connection and try again.");
+  }
+  if (response.status === 404) throw new ApiError(404, "This isn't on the site.");
+  if (!response.ok) throw new ApiError(response.status, "Something went wrong. Try again.");
+  return response;
 }
 
 export type Loadable<T> =
@@ -38,7 +33,6 @@ export type Loadable<T> =
   | { status: "ready"; data: T; retry: () => void };
 
 export function useApi<T>(path: string): Loadable<T> {
-  const apiFetch = useApiFetch();
   const [attempt, setAttempt] = useState(0);
   const [state, setState] = useState<
     { status: "loading" } | { status: "error"; error: ApiError } | { status: "ready"; data: T }
@@ -48,7 +42,7 @@ export function useApi<T>(path: string): Loadable<T> {
   useEffect(() => {
     let stale = false;
     setState({ status: "loading" });
-    apiFetch(path)
+    fetchContent(path)
       .then((response) => response.json())
       .then((data: T) => {
         if (!stale) setState({ status: "ready", data });
@@ -62,7 +56,7 @@ export function useApi<T>(path: string): Loadable<T> {
     return () => {
       stale = true;
     };
-  }, [apiFetch, path, attempt]);
+  }, [path, attempt]);
 
   return { ...state, retry };
 }
