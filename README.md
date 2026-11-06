@@ -16,7 +16,7 @@ To check the production build, run `npm run build && npm run preview` in `fronte
 
 ## Deploy
 
-Every push to `dev` builds the site and publishes it to https://kanzms.github.io/kanz-team/ through `.github/workflows/pages.yml`.
+Every push to `dev` builds the site through `.github/workflows/pages.yml` and publishes the result to the `gh-pages` branch, which GitHub Pages serves at https://kanzms.github.io/kanz-team/. Don't edit `gh-pages` by hand: each deploy replaces it.
 
 The site is served from a subfolder named after the repository. If the repository is renamed, change `base` in `frontend/vite.config.ts`.
 
