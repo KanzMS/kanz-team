@@ -8,7 +8,7 @@ const DEFAULTS = {
   chip:'الورشة الاسبوعية', kicker:'قراءة في الأسواق', title:'متابعة قرار الفيدرالي', hl:[2],
   name:'مع أحمد شعبان', role:'كبير محللي كنز', day:'الخميس', date:'12-11', tHead:'التوقيتات', theme:'weekly', cta:'ضيف سؤالك في الكومنتات',
   rows:[['السعودية','9:30'],['مصر','8:30'],['الكويت','9:30'],['الإمارات','10:30'],['قطر','9:30']],
-  pScale:100, pX:0
+  pScale:100, pX:0, tagScale:100
 };
 const LAY = {
   '916':{W:1080,H:1920,logo:{x:72,y:252,w:100},chip:{r:952,y:260,h:84},kicker:{r:948,y:394,fs:46,lh:70},
@@ -261,7 +261,8 @@ function render(c,fmt,t){
     // tag (day + date)
     const tp=k(t,3.85,.4,E.p3Out); if(tp>0.001){ const T=L.tag, ds=44, dts=44, dayW=measure(S.day,700,ds), dateW=S.date?measure(S.date,600,dts):0, gap=S.date?14:0;
       const tw=26+dayW+gap+dateW+26, th=72, tx=T.x, ty=T.y+fl+TL.down, cx=tx+tw/2, cy=ty+th/2;
-      c.save(); c.globalAlpha=tp; c.translate(cx,cy); c.rotate(-6*Math.PI/180); c.scale(Math.max(.02,Math.cos((88*(1-tp))*Math.PI/180)),1); c.translate(-cx,-cy);
+      c.save(); c.globalAlpha=tp; const tsc=(S.tagScale??100)/100; c.translate(cx,ty+th); c.scale(tsc,tsc); c.translate(-cx,-(ty+th)); // size grows up from the bottom edge, off the times card
+      c.translate(cx,cy); c.rotate(-6*Math.PI/180); c.scale(Math.max(.02,Math.cos((88*(1-tp))*Math.PI/180)),1); c.translate(-cx,-cy);
       rr(c,tx,ty+7,tw,th,16); c.fillStyle=TH.tagSlab; c.fill();
       const L2=tw+th; g=c.createLinearGradient(tx,ty,tx+tw,ty+th); g.addColorStop(0,TH.tag[0]); g.addColorStop(.55,TH.tag[1]); g.addColorStop(1,TH.tag[2]);
       rr(c,tx,ty,tw,th,16); c.fillStyle=g; c.fill();

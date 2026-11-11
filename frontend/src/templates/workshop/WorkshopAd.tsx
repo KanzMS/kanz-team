@@ -361,6 +361,11 @@ export function WorkshopAd() {
               {(id) => <input id={id} className="input" dir="ltr" value={state.date} onChange={(e) => update({ date: e.target.value })} />}
             </Field>
           </div>
+          <Field label="Day and date size">
+            {(id) => (
+              <input id={id} type="range" className="range" min={70} max={150} step={1} value={state.tagScale} onChange={(e) => update({ tagScale: +e.target.value })} />
+            )}
+          </Field>
           <Field label="Times card heading">
             {(id) => <input id={id} className="input" dir="auto" value={state.tHead} onChange={(e) => update({ tHead: e.target.value })} />}
           </Field>

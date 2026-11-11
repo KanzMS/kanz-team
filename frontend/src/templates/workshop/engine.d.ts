@@ -18,6 +18,8 @@ export type WorkshopState = {
   rows: [string, string][];
   pScale: number;
   pX: number;
+  /** The day and date tag's size, in percent. */
+  tagScale: number;
 };
 
 export const DUR: number;
