@@ -36,7 +36,7 @@ Add the file to `content/` and push to `dev`. When running locally, restart `npm
   ---
   ```
 
-- **Templates:** put a self-contained HTML page in `content/templates/`, named in lowercase with hyphens. It shows up under Templates, running in a frame. Its `<title>` is the name; add `<meta name="description" content="…">` for the summary and `<meta name="kanz:icon" content="…">` (a Material Symbols name) for the icon. A template runs on the public site, so whatever it embeds, such as photos, is public too.
+- **Templates:** each one is a React page in `frontend/src/templates/<name>/`, listed in `frontend/src/templates/index.ts`. The page uses the site's controls; the template's own drawing code (such as `workshop/engine.js`) holds its design and colours. Whatever a template embeds, such as photos, is public.
 
 ## Copying
 
