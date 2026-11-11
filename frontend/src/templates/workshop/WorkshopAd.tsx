@@ -319,7 +319,7 @@ export function WorkshopAd() {
   }
 
   return (
-    <div className="ad-layout tone-workshop" data-look={state.theme}>
+    <div className="ad-layout">
       <form className="ad-form" autoComplete="off" onSubmit={(e) => e.preventDefault()}>
         <fieldset className="panel">
           <legend className="panel-title">Topic</legend>
