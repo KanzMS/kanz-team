@@ -51,3 +51,38 @@
   --preview-light: #f8f9fb;
   --preview-dark: #0b0e13;
 }
+
+/* The workshop ad's page: the site's controls re-tinted in the ad's own
+   palette (see templates/workshop/engine.js), following its Weekly or Urgent
+   look. Scoped to that page; the rest of the site keeps its gold. */
+.tone-workshop {
+  --surface: #160a24;
+  --surface-dim: #0d0616;
+  --surface-cont-low: #1d0e30;
+  --border-subtle: rgba(209, 134, 248, 0.12);
+  --border-medium: #33204d;
+  --border-hover: #4f2f78;
+  --text-low: #a995c6;
+  --fill-subtle: rgba(209, 134, 248, 0.06);
+  --secondary: #7b2ff7;
+  --secondary-hover: #8d45ff;
+  --on-secondary: #fff;
+  --secondary-glow: rgba(123, 47, 247, 0.24);
+  --gold-ink: #d186f8;
+  --gold-border: rgba(209, 134, 248, 0.45);
+}
+.tone-workshop[data-look="urgent"] {
+  --surface: #1c0820;
+  --surface-dim: #0e0312;
+  --surface-cont-low: #260a29;
+  --border-subtle: rgba(255, 140, 170, 0.12);
+  --border-medium: #4a1a3f;
+  --border-hover: #6e2a5a;
+  --text-low: #c99aae;
+  --fill-subtle: rgba(255, 140, 170, 0.06);
+  --secondary: #e0245e;
+  --secondary-hover: #f23a72;
+  --secondary-glow: rgba(224, 36, 94, 0.22);
+  --gold-ink: #ff8fa8;
+  --gold-border: rgba(255, 135, 170, 0.45);
+}

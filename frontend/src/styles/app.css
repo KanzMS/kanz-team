@@ -600,6 +600,14 @@ textarea.input { resize: vertical; min-height: 64px; line-height: 1.6; field-siz
 .segmented-option[aria-pressed="true"] { color: var(--gold-ink); background: var(--secondary-glow); }
 .segmented-option[aria-pressed="true"] .material-symbols-outlined { font-variation-settings: "FILL" 1; }
 
+/* The deep purple accent is too dark to outline with, so focus rings use the lighter ink. */
+.tone-workshop :focus-visible { outline-color: var(--gold-ink); }
+.tone-workshop :is(.panel, .input, .segmented, .segmented-option, .word-chip, .pill, .ad-view) {
+  transition-property: background-color, border-color, color;
+  transition-duration: var(--motion-fast);
+  transition-timing-function: var(--ease-out);
+}
+
 .ad-layout {
   display: grid;
   grid-template-columns: minmax(0, 420px) minmax(0, 1fr);
