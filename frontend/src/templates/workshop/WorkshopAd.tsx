@@ -159,6 +159,53 @@ function Field({ label, hint, children }: { label: string; hint?: string; childr
   );
 }
 
+function Slider({
+  label,
+  value,
+  min,
+  max,
+  step,
+  unit,
+  onChange,
+}: {
+  label: string;
+  value: number;
+  min: number;
+  max: number;
+  step: number;
+  unit: string;
+  onChange: (value: number) => void;
+}) {
+  const id = useId();
+  return (
+    <div className="field">
+      <div className="field-row">
+        <label className="field-label" htmlFor={id}>
+          {label}
+        </label>
+        <output className="field-value mono" htmlFor={id}>
+          {value > 0 && unit === "px" ? `+${value}` : value}
+          {unit}
+        </output>
+      </div>
+      <input id={id} type="range" className="range" min={min} max={max} step={step} value={value} onChange={(e) => onChange(+e.target.value)} />
+    </div>
+  );
+}
+
+function Panel({ icon, title, children }: { icon: string; title: string; children: ReactNode }) {
+  const id = useId();
+  return (
+    <section className="panel form-panel" aria-labelledby={id}>
+      <h2 className="panel-head" id={id}>
+        <Icon name={icon} />
+        {title}
+      </h2>
+      {children}
+    </section>
+  );
+}
+
 function Segmented<T extends string>({
   label,
   value,
@@ -167,7 +214,7 @@ function Segmented<T extends string>({
 }: {
   label: string;
   value: T;
-  options: { value: T; label: string; icon?: string }[];
+  options: { value: T; label: string }[];
   onChange: (value: T) => void;
 }) {
   return (
@@ -180,7 +227,6 @@ function Segmented<T extends string>({
           aria-pressed={value === option.value}
           onClick={() => onChange(option.value)}
         >
-          {option.icon && <Icon name={option.icon} />}
           {option.label}
         </button>
       ))}
@@ -190,19 +236,26 @@ function Segmented<T extends string>({
 
 /* ── Page ────────────────────────────────────────────────────────────────── */
 
+const RESET_CONFIRM_MS = 4000;
+
 export function WorkshopAd() {
   const [state, setState] = useState<WorkshopState>(loadState);
   const [format, setFormat] = useState<Format>("916");
   const [playing, setPlaying] = useState(() => !matchMedia("(prefers-reduced-motion: reduce)").matches);
   const [images, setImages] = useState<Images | null>(null);
-  const [customPerson, setCustomPerson] = useState<HTMLImageElement | null>(null);
-  const [busy, setBusy] = useState(false);
+  const [customPerson, setCustomPerson] = useState<{ image: HTMLImageElement; url: string } | null>(null);
+  const [busy, setBusy] = useState<"png" | "video" | null>(null);
   const [progress, setProgress] = useState(0);
   const [status, setStatus] = useState<Status | null>(null);
+  const [confirmReset, setConfirmReset] = useState(false);
   const canvas = useRef<HTMLCanvasElement>(null);
+  const scrubber = useRef<HTMLInputElement>(null);
+  const clock = useRef<HTMLSpanElement>(null);
   const photoInput = useRef<HTMLInputElement>(null);
-  const live = useRef({ state, format, playing, images, customPerson });
-  live.current = { state, format, playing, images, customPerson };
+  /** Where the preview is, in seconds; the loop moves it while playing. */
+  const time = useRef(playing ? 0 : STILL_TIME);
+  const live = useRef({ state, format, playing, images, person: customPerson?.image });
+  live.current = { state, format, playing, images, person: customPerson?.image };
 
   // The ad's font and pictures have to be in before the first frame, or text measures wrong.
   useEffect(() => {
@@ -232,22 +285,39 @@ export function WorkshopAd() {
     }
   }, [state]);
 
-  // One animation loop for the page's life; it reads the latest inputs from a ref.
+  useEffect(() => {
+    if (!confirmReset) return;
+    const timer = window.setTimeout(() => setConfirmReset(false), RESET_CONFIRM_MS);
+    return () => window.clearTimeout(timer);
+  }, [confirmReset]);
+
+  // One animation loop for the page's life. It reads the latest inputs from a ref
+  // and moves the scrubber and clock directly, so playing never re-renders React.
   useEffect(() => {
     let frame = 0;
-    const start = performance.now();
-    const tick = () => {
-      const { state, format, playing, images, customPerson } = live.current;
-      const context = canvas.current?.getContext("2d");
-      if (context && images) {
-        const t = playing ? Math.min(((performance.now() - start) / 1000) % (DUR + 1), DUR) : STILL_TIME;
-        drawFrame(context, format, t, state, { ...images, person: customPerson ?? images.person });
+    let last = performance.now();
+    const tick = (now: number) => {
+      const { state, format, playing, images, person } = live.current;
+      if (playing) {
+        // Runs to the end, holds the last frame for a second, then starts again.
+        time.current += (now - last) / 1000;
+        if (time.current > DUR + 1) time.current = 0;
       }
+      last = now;
+      const t = Math.min(time.current, DUR);
+      const context = canvas.current?.getContext("2d");
+      if (context && images) drawFrame(context, format, t, state, { ...images, person: person ?? images.person });
+      if (scrubber.current && document.activeElement !== scrubber.current) scrubber.current.value = String(t);
+      if (clock.current) clock.current.textContent = `${t.toFixed(1)}s`;
       frame = requestAnimationFrame(tick);
     };
     frame = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frame);
   }, []);
+
+  useEffect(() => () => {
+    if (customPerson) URL.revokeObjectURL(customPerson.url);
+  }, [customPerson]);
 
   const update = (patch: Partial<WorkshopState>) => setState((s) => ({ ...s, ...patch }));
   const setRow = (index: number, column: 0 | 1, value: string) =>
@@ -256,6 +326,7 @@ export function WorkshopAd() {
       rows: s.rows.map((row, i) => (i === index ? (column === 0 ? [value, row[1]] : [row[0], value]) : row)),
     }));
   const titleWords = words(state.title);
+  const { W, H } = LAY[format];
 
   function setTitle(title: string) {
     const count = words(title).length;
@@ -266,12 +337,24 @@ export function WorkshopAd() {
     update({ hl: state.hl.includes(index) ? state.hl.filter((i) => i !== index) : [...state.hl, index] });
   }
 
+  function togglePlay() {
+    if (!playing && time.current >= DUR) time.current = 0;
+    setPlaying(!playing);
+  }
+
+  function scrub(value: number) {
+    setPlaying(false);
+    time.current = value;
+  }
+
   async function choosePhoto(file: File | undefined) {
     if (!file) return;
+    const url = URL.createObjectURL(file);
     try {
-      setCustomPerson(await loadImage(URL.createObjectURL(file)));
-      setStatus({ text: "Photo changed.", tone: "ok" });
+      setCustomPerson({ image: await loadImage(url), url });
+      setStatus(null);
     } catch {
+      URL.revokeObjectURL(url);
       setStatus({ text: "That file isn't an image that works here. Try a PNG.", tone: "error" });
     }
   }
@@ -282,15 +365,21 @@ export function WorkshopAd() {
   }
 
   function resetAll() {
+    if (!confirmReset) {
+      setConfirmReset(true);
+      return;
+    }
+    setConfirmReset(false);
     setState(fresh());
     resetPhoto();
     setStatus({ text: "Everything is back to the original.", tone: "ok" });
   }
 
-  async function exportAd(kind: "png" | "video", target: Format) {
-    if (!images) return;
-    const frameImages = { ...images, person: customPerson ?? images.person };
-    setBusy(true);
+  async function exportAd(kind: "png" | "video") {
+    if (!images || busy) return;
+    const frameImages = { ...images, person: customPerson?.image ?? images.person };
+    const target = format;
+    setBusy(kind);
     setProgress(0);
     setStatus(null);
     try {
@@ -303,17 +392,14 @@ export function WorkshopAd() {
         download(blob, `${fileStem(state, target)}.png`);
         setStatus({ text: `Downloaded ${fileStem(state, target)}.png`, tone: "ok" });
       } else {
-        const { blob, extension } = await renderVideo(state, frameImages, target, (share) => {
-          setProgress(share);
-          setStatus({ text: `Making the video… ${Math.round(share * 100)}%` });
-        });
+        const { blob, extension } = await renderVideo(state, frameImages, target, setProgress);
         download(blob, `${fileStem(state, target)}.${extension}`);
         setStatus({ text: `Downloaded ${fileStem(state, target)}.${extension}`, tone: "ok" });
       }
     } catch (error) {
-      setStatus({ text: `The export failed: ${error instanceof Error ? error.message : error}`, tone: "error" });
+      setStatus({ text: `The download failed: ${error instanceof Error ? error.message : error}`, tone: "error" });
     } finally {
-      setBusy(false);
+      setBusy(null);
       setProgress(0);
     }
   }
@@ -321,8 +407,7 @@ export function WorkshopAd() {
   return (
     <div className="ad-layout">
       <form className="ad-form" autoComplete="off" onSubmit={(e) => e.preventDefault()}>
-        <fieldset className="panel">
-          <legend className="panel-title">Topic</legend>
+        <Panel icon="title" title="Topic">
           <Field label="Workshop name">
             {(id) => <input id={id} className="input" dir="auto" value={state.chip} onChange={(e) => update({ chip: e.target.value })} />}
           </Field>
@@ -330,7 +415,7 @@ export function WorkshopAd() {
             {(id) => <input id={id} className="input" dir="auto" value={state.kicker} onChange={(e) => update({ kicker: e.target.value })} />}
           </Field>
           <Field label="Title" hint="Press Enter for a new line. A long title splits into two lines on its own.">
-            {(id) => <textarea id={id} className="input" dir="auto" rows={2} value={state.title} onChange={(e) => setTitle(e.target.value)} />}
+            {(id) => <textarea id={id} className="input" dir="auto" rows={1} value={state.title} onChange={(e) => setTitle(e.target.value)} />}
           </Field>
           {titleWords.length > 0 && (
             <div className="field">
@@ -344,15 +429,15 @@ export function WorkshopAd() {
                   </button>
                 ))}
               </div>
+              <p className="field-hint">Tap a word to colour it in the ad.</p>
             </div>
           )}
           <Field label="Closing line">
             {(id) => <input id={id} className="input" dir="auto" value={state.cta} onChange={(e) => update({ cta: e.target.value })} />}
           </Field>
-        </fieldset>
+        </Panel>
 
-        <fieldset className="panel">
-          <legend className="panel-title">When</legend>
+        <Panel icon="event" title="When">
           <div className="field-pair">
             <Field label="Day">
               {(id) => <input id={id} className="input" dir="auto" value={state.day} onChange={(e) => update({ day: e.target.value })} />}
@@ -361,16 +446,15 @@ export function WorkshopAd() {
               {(id) => <input id={id} className="input" dir="ltr" value={state.date} onChange={(e) => update({ date: e.target.value })} />}
             </Field>
           </div>
-          <Field label="Day and date size">
-            {(id) => (
-              <input id={id} type="range" className="range" min={70} max={150} step={1} value={state.tagScale} onChange={(e) => update({ tagScale: +e.target.value })} />
-            )}
-          </Field>
+          <Slider label="Day and date size" value={state.tagScale} min={70} max={150} step={1} unit="%" onChange={(tagScale) => update({ tagScale })} />
           <Field label="Times card heading">
             {(id) => <input id={id} className="input" dir="auto" value={state.tHead} onChange={(e) => update({ tHead: e.target.value })} />}
           </Field>
           <div className="field">
-            <span className="field-label">Times</span>
+            <div className="time-row time-head" aria-hidden="true">
+              <span className="field-label">Country</span>
+              <span className="field-label">Time</span>
+            </div>
             <div className="time-rows">
               {state.rows.map(([country, time], i) => (
                 <div className="time-row" key={i}>
@@ -379,7 +463,7 @@ export function WorkshopAd() {
                   <button
                     type="button"
                     className="icon-button"
-                    aria-label={`Remove row ${i + 1}`}
+                    aria-label={`Remove ${country || `row ${i + 1}`}`}
                     disabled={state.rows.length <= 1}
                     onClick={() => update({ rows: state.rows.filter((_, j) => j !== i) })}
                   >
@@ -390,18 +474,17 @@ export function WorkshopAd() {
             </div>
             <button
               type="button"
-              className="pill add-row"
+              className="text-button"
               disabled={state.rows.length >= MAX_ROWS}
               onClick={() => update({ rows: [...state.rows, ["", ""]] })}
             >
               <Icon name="add" />
-              Add a country
+              {state.rows.length >= MAX_ROWS ? `Up to ${MAX_ROWS} countries` : "Add a country"}
             </button>
           </div>
-        </fieldset>
+        </Panel>
 
-        <fieldset className="panel">
-          <legend className="panel-title">Presenter</legend>
+        <Panel icon="person" title="Presenter">
           <Field label="Name">
             {(id) => <input id={id} className="input" dir="auto" value={state.name} onChange={(e) => update({ name: e.target.value })} />}
           </Field>
@@ -410,48 +493,52 @@ export function WorkshopAd() {
           </Field>
           <div className="field">
             <span className="field-label">Photo</span>
-            <div className="photo-actions">
-              <label className="pill">
-                <Icon name="upload" />
-                Upload a photo
-                <input
-                  ref={photoInput}
-                  type="file"
-                  accept="image/png,image/webp"
-                  className="visually-hidden"
-                  onChange={(e) => choosePhoto(e.target.files?.[0])}
-                />
-              </label>
-              {customPerson && (
-                <button type="button" className="pill" onClick={resetPhoto}>
-                  <Icon name="undo" />
-                  Original photo
-                </button>
-              )}
+            <div className="photo-row">
+              <img className="photo-thumb" src={customPerson?.url ?? personUrl} alt="" />
+              <div className="photo-text">
+                <span className="photo-name">{customPerson ? "Your photo" : "Original photo"}</span>
+                <span className="field-hint">PNG or WebP with a transparent background, cut off at the bottom.</span>
+                <div className="photo-actions">
+                  <label className="pill">
+                    <Icon name="upload" />
+                    {customPerson ? "Replace" : "Upload"}
+                    <input
+                      ref={photoInput}
+                      type="file"
+                      accept="image/png,image/webp"
+                      className="visually-hidden"
+                      onChange={(e) => choosePhoto(e.target.files?.[0])}
+                    />
+                  </label>
+                  {customPerson && (
+                    <button type="button" className="pill" onClick={resetPhoto}>
+                      <Icon name="undo" />
+                      Use original
+                    </button>
+                  )}
+                </div>
+              </div>
             </div>
-            <p className="field-hint">A PNG with a transparent background, cut off at the bottom in the middle.</p>
           </div>
           <div className="field-pair">
-            <Field label="Photo size">
-              {(id) => (
-                <input id={id} type="range" className="range" min={70} max={130} step={1} value={state.pScale} onChange={(e) => update({ pScale: +e.target.value })} />
-              )}
-            </Field>
-            <Field label="Photo position">
-              {(id) => (
-                <input id={id} type="range" className="range" min={-200} max={200} step={2} value={state.pX} onChange={(e) => update({ pX: +e.target.value })} />
-              )}
-            </Field>
+            <Slider label="Photo size" value={state.pScale} min={70} max={130} step={1} unit="%" onChange={(pScale) => update({ pScale })} />
+            <Slider label="Photo position" value={state.pX} min={-200} max={200} step={2} unit="px" onChange={(pX) => update({ pX })} />
           </div>
-        </fieldset>
+        </Panel>
 
-        <button type="button" className="pill reset-all" onClick={resetAll}>
-          <Icon name="restart_alt" />
-          Reset everything
-        </button>
+        <div className="form-foot">
+          <p className="field-hint">
+            <Icon name="cloud_done" />
+            Your edits are saved in this browser.
+          </p>
+          <button type="button" className={`text-button${confirmReset ? " is-danger" : ""}`} onClick={resetAll}>
+            <Icon name="restart_alt" />
+            {confirmReset ? "Click again to reset" : "Reset everything"}
+          </button>
+        </div>
       </form>
 
-      <section className="panel ad-stage" aria-label="Preview">
+      <section className="panel ad-stage" aria-label="Preview and download">
         <div className="ad-toolbar">
           <Segmented<Format>
             label="Size"
@@ -471,52 +558,58 @@ export function WorkshopAd() {
               { value: "urgent", label: "Urgent" },
             ]}
           />
-          <Segmented<"play" | "still">
-            label="Playback"
-            value={playing ? "play" : "still"}
-            onChange={(v) => setPlaying(v === "play")}
-            options={[
-              { value: "play", label: "Play", icon: "play_arrow" },
-              { value: "still", label: "Last frame", icon: "pause" },
-            ]}
-          />
         </div>
 
         <div className="ad-view">
-          {!images && <span className="skeleton ad-skeleton" style={{ aspectRatio: format === "sq" ? "1" : "9 / 16" }} />}
-          <canvas
-            ref={canvas}
-            className="ad-canvas"
-            width={LAY[format].W}
-            height={LAY[format].H}
-            hidden={!images}
-            role="img"
-            aria-label="Preview of the ad"
-          />
+          {!images && <span className="skeleton ad-canvas" style={{ aspectRatio: `${W} / ${H}` }} />}
+          <canvas ref={canvas} className="ad-canvas" width={W} height={H} hidden={!images} role="img" aria-label="Preview of the ad" />
         </div>
 
-        <div className="ad-exports">
-          <button type="button" className="pill pill-primary" disabled={busy || !images} onClick={() => exportAd("png", "916")}>
-            <Icon name="image" />
-            Image 9:16
+        <div className="ad-transport">
+          <button type="button" className="icon-button is-solid" aria-label={playing ? "Pause" : "Play"} onClick={togglePlay}>
+            <Icon name={playing ? "pause" : "play_arrow"} />
           </button>
-          <button type="button" className="pill pill-primary" disabled={busy || !images} onClick={() => exportAd("png", "sq")}>
-            <Icon name="image" />
-            Image 1:1
-          </button>
-          <button type="button" className="pill" disabled={busy || !images} onClick={() => exportAd("video", "916")}>
-            <Icon name="movie" />
-            Video 9:16
-          </button>
-          <button type="button" className="pill" disabled={busy || !images} onClick={() => exportAd("video", "sq")}>
-            <Icon name="movie" />
-            Video 1:1
-          </button>
+          <input
+            ref={scrubber}
+            type="range"
+            className="range ad-scrubber"
+            aria-label="Time in the animation"
+            min={0}
+            max={DUR}
+            step={0.01}
+            defaultValue={time.current}
+            onChange={(e) => scrub(+e.target.value)}
+          />
+          <span className="ad-clock mono" aria-hidden="true">
+            <span ref={clock}>0.0s</span> / {DUR.toFixed(1)}s
+          </span>
         </div>
-        <div className="ad-progress" aria-hidden="true">
-          <i style={{ width: `${progress * 100}%` }} />
+
+        <div className="ad-download">
+          <div className="ad-download-info">
+            <span className="ad-download-title">Download</span>
+            <span className="ad-download-meta mono">
+              {W} × {H} px
+            </span>
+          </div>
+          <div className="ad-download-actions">
+            <button type="button" className="pill pill-primary" disabled={!!busy || !images} onClick={() => exportAd("png")}>
+              <Icon name="image" />
+              {busy === "png" ? "Making…" : "Image"}
+            </button>
+            <button type="button" className="pill" disabled={!!busy || !images} onClick={() => exportAd("video")}>
+              <Icon name="movie" />
+              {busy === "video" ? `Making… ${Math.round(progress * 100)}%` : `Video · ${DUR}s`}
+            </button>
+          </div>
         </div>
-        <p className={`ad-status${status?.tone ? ` is-${status.tone}` : ""}`} role="status">
+        {busy === "video" && (
+          <div className="ad-progress" role="progressbar" aria-label="Making the video" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(progress * 100)}>
+            <i style={{ width: `${progress * 100}%` }} />
+          </div>
+        )}
+        <p className={`ad-status${status?.tone ? ` is-${status.tone}` : ""}`} role="status" hidden={!status}>
+          {status && <Icon name={status.tone === "error" ? "error" : "check_circle"} />}
           {status?.text}
         </p>
       </section>

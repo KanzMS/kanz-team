@@ -15,7 +15,7 @@ export const TEMPLATES: Template[] = [
   {
     slug: "workshop-ad",
     title: "Workshop ad",
-    summary: "The weekly workshop ad, as an image or video for Reels or X.",
+    summary: "Fill in this week's details, check the animation, and download it as an image or video for Reels or X.",
     icon: "campaign",
     Component: WorkshopAd,
   },

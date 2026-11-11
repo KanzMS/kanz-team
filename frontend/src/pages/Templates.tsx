@@ -11,7 +11,7 @@ export function TemplatesPage() {
   return (
     <div className="page">
       <h1 className="page-title">{TEMPLATES.length > 1 ? "Templates" : current.title}</h1>
-      <p className="page-sub">{current.summary} Fill in the details, watch it move, then download it.</p>
+      <p className="page-sub">{current.summary}</p>
 
       {TEMPLATES.length > 1 && (
         <nav className="template-list" aria-label="Templates">
