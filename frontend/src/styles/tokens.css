@@ -26,7 +26,8 @@
   --text-mid: rgba(255, 255, 255, 0.9);
   --text-low: rgba(255, 255, 255, 0.6);
   --fill-subtle: rgba(255, 255, 255, 0.03);
-  --hd-fill: oklch(0.205 0 0 / 0.4);
+  --hd-fill: oklch(0.16 0 0 / 0.72);
+  --hd-blur: blur(20px) saturate(140%);
   --hd-border: oklch(1 0 0 / 0.18);
   --hd-inset: inset 0 1px 0 oklch(1 0 0 / 0.16), inset 0 -1px 0 oklch(0 0 0 / 0.08);
   --hd-shadow: 0 16px 40px -8px oklch(0 0 0 / 0.55), 0 4px 10px -3px oklch(0 0 0 / 0.35);
