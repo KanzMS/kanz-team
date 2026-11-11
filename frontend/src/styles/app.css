@@ -599,6 +599,20 @@ textarea.input { resize: none; min-height: 40px; line-height: 1.6; field-sizing:
 .text-button:hover:not(:disabled) { color: var(--text-high); background: var(--fill-subtle); }
 .text-button:disabled { color: var(--text-low); cursor: default; }
 .text-button.is-danger { color: var(--error); }
+.text-button.is-small { min-height: 24px; margin-block: -4px; font-size: 12px; }
+.text-button.is-small .material-symbols-outlined { font-size: 16px; }
+
+/* A group of related controls inside a panel, set off on a quiet fill. */
+.subgroup {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 14px;
+  background: var(--fill-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+}
+.subgroup .segmented { align-self: flex-start; }
 
 .photo-row { display: flex; gap: 14px; align-items: flex-start; }
 .photo-thumb {

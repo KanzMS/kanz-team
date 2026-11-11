@@ -2,7 +2,7 @@ import { ArrayBufferTarget, Muxer } from "mp4-muxer";
 import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 import { Icon } from "../../components";
 import { saveFile } from "../../lib/image";
-import { DEFAULTS, DUR, FPS, LAY, drawFrame, type Format, type Theme, type WorkshopState } from "./engine";
+import { DEFAULTS, DUR, FPS, LAY, drawFrame, type Format, type TagShape, type Theme, type WorkshopState } from "./engine";
 import logoUrl from "./logo.png";
 import personUrl from "./person.webp";
 
@@ -25,6 +25,7 @@ function loadState(): WorkshopState {
       const state = { ...fresh(), ...saved };
       if (!Array.isArray(state.hl)) state.hl = [];
       if (state.theme !== "urgent") state.theme = "weekly";
+      state.tagPos = { ...fresh().tagPos, ...state.tagPos };
       return state;
     }
   } catch {
@@ -327,6 +328,8 @@ export function WorkshopAd() {
     }));
   const titleWords = words(state.title);
   const { W, H } = LAY[format];
+  const [tagX, tagY] = state.tagPos[format];
+  const moveTag = (x: number, y: number) => setState((s) => ({ ...s, tagPos: { ...s.tagPos, [format]: [x, y] } }));
 
   function setTitle(title: string) {
     const count = words(title).length;
@@ -446,7 +449,35 @@ export function WorkshopAd() {
               {(id) => <input id={id} className="input" dir="ltr" value={state.date} onChange={(e) => update({ date: e.target.value })} />}
             </Field>
           </div>
-          <Slider label="Day and date size" value={state.tagScale} min={70} max={150} step={1} unit="%" onChange={(tagScale) => update({ tagScale })} />
+          <div className="subgroup">
+            <div className="field-row">
+              <span className="field-label" id="tag-shape-label">
+                Day and date tag
+              </span>
+              {(tagX !== 0 || tagY !== 0 || state.tagScale !== 100) && (
+                <button type="button" className="text-button is-small" onClick={() => { moveTag(0, 0); update({ tagScale: 100 }); }}>
+                  <Icon name="restart_alt" />
+                  Reset position
+                </button>
+              )}
+            </div>
+            <Segmented<TagShape>
+              label="Tag shape"
+              value={state.tagShape}
+              onChange={(tagShape) => update({ tagShape })}
+              options={[
+                { value: "tilted", label: "Tilted" },
+                { value: "straight", label: "Straight" },
+                { value: "pill", label: "Pill" },
+              ]}
+            />
+            <Slider label="Size" value={state.tagScale} min={70} max={150} step={1} unit="%" onChange={(tagScale) => update({ tagScale })} />
+            <div className="field-pair">
+              <Slider label="Left / right" value={tagX} min={-400} max={400} step={2} unit="px" onChange={(x) => moveTag(x, tagY)} />
+              <Slider label="Up / down" value={tagY} min={-300} max={300} step={2} unit="px" onChange={(y) => moveTag(tagX, y)} />
+            </div>
+            <p className="field-hint">Position is kept separately for {format === "sq" ? "X 1:1" : "Reels 9:16"}.</p>
+          </div>
           <Field label="Times card heading">
             {(id) => <input id={id} className="input" dir="auto" value={state.tHead} onChange={(e) => update({ tHead: e.target.value })} />}
           </Field>

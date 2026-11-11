@@ -1,5 +1,6 @@
 export type Format = "916" | "sq";
 export type Theme = "weekly" | "urgent";
+export type TagShape = "tilted" | "straight" | "pill";
 
 export type WorkshopState = {
   chip: string;
@@ -20,6 +21,9 @@ export type WorkshopState = {
   pX: number;
   /** The day and date tag's size, in percent. */
   tagScale: number;
+  tagShape: TagShape;
+  /** Per size, the tag's offset from where the design puts it, in pixels: [right, down]. */
+  tagPos: Record<Format, [number, number]>;
 };
 
 export const DUR: number;
