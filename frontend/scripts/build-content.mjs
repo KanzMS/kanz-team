@@ -64,6 +64,31 @@ function loadDocs() {
     .sort((a, b) => a.order - b.order || compare(a.title, b.title));
 }
 
+// Templates are self-contained HTML pages; the site shows each one in a frame.
+function htmlMeta(html, name) {
+  const tag = html.match(new RegExp(`<meta[^>]*name=["']${name}["'][^>]*>`, "i"))?.[0];
+  return tag?.match(/content=["']([^"']*)["']/i)?.[1]?.trim() ?? "";
+}
+
+function loadTemplates() {
+  const root = join(source, "templates");
+  if (!existsSync(root)) return [];
+  return readdirSync(root)
+    .map((file) => parse(file))
+    .filter(({ name, ext }) => ext === ".html" && SLUG.test(name))
+    .map(({ name, base }) => {
+      const html = readFileSync(join(root, base), "utf8");
+      return {
+        slug: name,
+        title: html.match(/<title>([^<]*)<\/title>/i)?.[1]?.trim() || title(name),
+        summary: htmlMeta(html, "description"),
+        icon: htmlMeta(html, "kanz:icon") || "draw",
+        file: base,
+      };
+    })
+    .sort((a, b) => compare(a.title, b.title));
+}
+
 function writeJson(path, value) {
   mkdirSync(dirname(path), { recursive: true });
   writeFileSync(path, JSON.stringify(value));
@@ -86,4 +111,12 @@ writeJson(
 );
 for (const doc of docs) writeJson(join(out, "docs", `${doc.slug}.json`), doc);
 
-console.log(`Content: ${assets.length} images, ${docs.length} docs.`);
+const templates = loadTemplates();
+for (const template of templates) {
+  const target = join(out, "templates", template.file);
+  mkdirSync(dirname(target), { recursive: true });
+  cpSync(join(source, "templates", template.file), target);
+}
+writeJson(join(out, "templates.json"), templates);
+
+console.log(`Content: ${assets.length} images, ${docs.length} docs, ${templates.length} templates.`);

@@ -3,6 +3,7 @@ import { Icon } from "./components";
 import { siteUrl } from "./lib/api";
 import { DocsPage } from "./pages/Docs";
 import { LibraryPage } from "./pages/Library";
+import { TemplatesPage } from "./pages/Templates";
 
 function Header() {
   return (
@@ -20,6 +21,10 @@ function Header() {
             <Icon name="description" />
             Brand docs
           </NavLink>
+          <NavLink to="/templates" className="nav-link">
+            <Icon name="draw" />
+            Templates
+          </NavLink>
         </nav>
       </div>
     </header>
@@ -35,6 +40,8 @@ export function App() {
           <Route path="/library" element={<LibraryPage />} />
           <Route path="/docs" element={<DocsPage />} />
           <Route path="/docs/:slug" element={<DocsPage />} />
+          <Route path="/templates" element={<TemplatesPage />} />
+          <Route path="/templates/:slug" element={<TemplatesPage />} />
           <Route path="*" element={<Navigate to="/library" replace />} />
         </Routes>
       </main>

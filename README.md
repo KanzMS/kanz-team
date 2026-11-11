@@ -1,6 +1,6 @@
 # Kanz team
 
-A site for the Kanz team: a library of logos and designs that copy on click, and the brand docs. A static React site, deployed to GitHub Pages from the `dev` branch, using MokhbirPro's design system.
+A site for the Kanz team: a library of logos and designs that copy on click, the brand docs, and templates for making posts. A static React site, deployed to GitHub Pages from the `dev` branch, using MokhbirPro's design system.
 
 **The site is public.** There is no sign-in, so anyone with the URL can read everything in `content/`. Don't add anything that isn't OK to share.
 
@@ -35,6 +35,8 @@ Add the file to `content/` and push to `dev`. When running locally, restart `npm
   order: 5
   ---
   ```
+
+- **Templates:** put a self-contained HTML page in `content/templates/`, named in lowercase with hyphens. It shows up under Templates, running in a frame. Its `<title>` is the name; add `<meta name="description" content="…">` for the summary and `<meta name="kanz:icon" content="…">` (a Material Symbols name) for the icon. A template runs on the public site, so whatever it embeds, such as photos, is public too.
 
 ## Copying
 
