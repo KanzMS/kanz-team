@@ -37,6 +37,7 @@ Add the file to `content/` and push to `dev`. When running locally, restart `npm
   ```
 
 - **Templates:** each one is a React page in `frontend/src/templates/<name>/`, listed in `frontend/src/templates/index.ts`. The page uses the site's controls; the template's own drawing code (such as `workshop/engine.js`) holds its design and colours. Whatever a template embeds, such as photos, is public.
+- **Workshop CTA:** the StreamYard promo code overlay, in the Workshop CTA tab. Only the code changes there; the Arabic box and the name bar are pre-rendered frames in `frontend/src/workshop-cta/base_top.png` and `base_bottom.png`, so changing the box's text or design means rendering those again. `engine.js` draws the code tag and writes the GIF: 91 frames with one held so the loop lasts 10 minutes, under StreamYard's 3 MB and 108-frame limits.
 
 ## Copying
 

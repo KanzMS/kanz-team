@@ -4,6 +4,7 @@ import { siteUrl } from "./lib/api";
 import { DocsPage } from "./pages/Docs";
 import { LibraryPage } from "./pages/Library";
 import { TemplatesPage } from "./pages/Templates";
+import { WorkshopCtaPage } from "./pages/WorkshopCta";
 
 function Header() {
   return (
@@ -25,6 +26,10 @@ function Header() {
             <Icon name="draw" />
             Templates
           </NavLink>
+          <NavLink to="/workshop-cta" className="nav-link">
+            <Icon name="gif_box" />
+            Workshop CTA
+          </NavLink>
         </nav>
       </div>
     </header>
@@ -42,6 +47,7 @@ export function App() {
           <Route path="/docs/:slug" element={<DocsPage />} />
           <Route path="/templates" element={<TemplatesPage />} />
           <Route path="/templates/:slug" element={<TemplatesPage />} />
+          <Route path="/workshop-cta" element={<WorkshopCtaPage />} />
           <Route path="*" element={<Navigate to="/library" replace />} />
         </Routes>
       </main>
