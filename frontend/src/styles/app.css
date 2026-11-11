@@ -118,8 +118,22 @@ p { text-wrap: pretty; }
   border: 1px solid var(--hd-border);
   border-radius: 999px;
   box-shadow: var(--hd-inset), var(--hd-shadow);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  /* Written through a variable so the CSS minifier can't fold it into the
+     -webkit- spelling alone, which current Chrome no longer reads. */
+  -webkit-backdrop-filter: var(--hd-blur);
+  backdrop-filter: var(--hd-blur);
+}
+/* A fade from the page colour behind the header, so content dissolves before it reaches the pill. */
+.header::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  inset-block: -12px -18px;
+  left: 50%;
+  width: 100vw;
+  translate: -50% 0;
+  background: linear-gradient(to bottom, var(--canvas) 55%, transparent);
 }
 .brand {
   display: flex;
