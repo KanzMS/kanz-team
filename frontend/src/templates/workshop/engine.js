@@ -136,6 +136,28 @@ function clockIcon(c,cx,cy,d,mA,hA){ c.save(); c.translate(cx-d/2,cy-d/2); c.sca
   const hand=(len,ang0,rot)=>{ const a=(ang0+rot)*Math.PI/180; c.beginPath(); c.moveTo(35,35); c.lineTo(35+len*Math.cos(a),35+len*Math.sin(a)); c.stroke(); };
   hand(10,-90,hA); hand(9,0,mA); c.restore(); }
 
+/* ---------- sticker: a die-cut badge with a white border and a peeled corner ---------- */
+const stk=document.createElement('canvas'), stx=stk.getContext('2d');
+function sticker(c,x,y,w,h){
+  const B=11, R=22, F=30, W=Math.ceil(w+2*B), H=Math.ceil(h+2*B);
+  if(stk.width<W) stk.width=W; if(stk.height<H) stk.height=H;
+  const s=stx; s.setTransform(1,0,0,1,0,0); s.globalCompositeOperation='source-over'; s.clearRect(0,0,stk.width,stk.height);
+  rr(s,0,0,W,H,R+B); s.fillStyle='#fff'; s.fill();
+  let g=s.createLinearGradient(B,B,B+w,B+h); g.addColorStop(0,TH.tag[0]); g.addColorStop(.55,TH.tag[1]); g.addColorStop(1,TH.tag[2]);
+  rr(s,B,B,w,h,R); s.fillStyle=g; s.fill();
+  s.save(); rr(s,B,B,w,h,R); s.clip();
+  g=s.createLinearGradient(0,B,0,B+h*.55); g.addColorStop(0,'rgba(255,255,255,.22)'); g.addColorStop(1,'rgba(255,255,255,0)'); s.fillStyle=g; s.fillRect(B,B,w,h*.55);
+  s.restore();
+  // peel the bottom-left corner: cut it away, then lay the flap's white back over the fold line
+  s.globalCompositeOperation='destination-out'; s.beginPath(); s.moveTo(0,H-F); s.lineTo(0,H); s.lineTo(F,H); s.closePath(); s.fill();
+  s.globalCompositeOperation='source-over';
+  s.save(); s.shadowColor='rgba(20,0,40,.35)'; s.shadowBlur=6; s.shadowOffsetX=2; s.shadowOffsetY=-2;
+  g=s.createLinearGradient(0,H-F,F,H); g.addColorStop(0,'#ffffff'); g.addColorStop(1,'#d9d2e3');
+  s.beginPath(); s.moveTo(0,H-F); s.lineTo(F,H); s.lineTo(F,H-F); s.closePath(); s.fillStyle=g; s.fill(); s.restore();
+  c.save(); c.shadowColor='rgba(8,2,18,.5)'; c.shadowBlur=22; c.shadowOffsetY=10;
+  c.drawImage(stk,0,0,W,H,x-B,y-B,W,H); c.restore();
+}
+
 /* ---------- person cache (scaled + bottom fade) ---------- */
 let pc=null, pcKey='';
 function personCanvas(L){
@@ -262,14 +284,17 @@ function render(c,fmt,t){
     const tp=k(t,3.85,.4,E.p3Out); if(tp>0.001){ const T=L.tag, ds=44, dts=44, dayW=measure(S.day,700,ds), dateW=S.date?measure(S.date,600,dts):0, gap=S.date?14:0;
       const tw=26+dayW+gap+dateW+26, th=72, [ox,oy]=S.tagPos?.[fmt]??[0,0], tx=T.x+ox, ty=T.y+fl+TL.down+oy, shape=S.tagShape??'tilted', rad=shape==='pill'?th/2:16, cx=tx+tw/2, cy=ty+th/2;
       c.save(); c.globalAlpha=tp; const tsc=(S.tagScale??100)/100; c.translate(cx,ty+th); c.scale(tsc,tsc); c.translate(-cx,-(ty+th)); // size grows up from the bottom edge, off the times card
-      c.translate(cx,cy); c.rotate((shape==='tilted'?-6:0)*Math.PI/180); c.scale(Math.max(.02,Math.cos((88*(1-tp))*Math.PI/180)),1); c.translate(-cx,-cy);
+      c.translate(cx,cy); c.rotate(({tilted:-6,sticker:-4}[shape]??0)*Math.PI/180);
+      if(shape==='sticker'){ const pop=lerp(1.45,1,k(t,3.85,.45,E.back(2.2))); c.scale(pop,pop); } else c.scale(Math.max(.02,Math.cos((88*(1-tp))*Math.PI/180)),1);
+      c.translate(-cx,-cy);
+      if(shape==='sticker') sticker(c,tx,ty,tw,th); else {
       rr(c,tx,ty+7,tw,th,rad); c.fillStyle=TH.tagSlab; c.fill();
       const L2=tw+th; g=c.createLinearGradient(tx,ty,tx+tw,ty+th); g.addColorStop(0,TH.tag[0]); g.addColorStop(.55,TH.tag[1]); g.addColorStop(1,TH.tag[2]);
       rr(c,tx,ty,tw,th,rad); c.fillStyle=g; c.fill();
       c.save(); rr(c,tx,ty,tw,th,rad); c.clip(); c.fillStyle=`rgba(255,255,255,${TH.tagTop})`; c.fillRect(tx,ty,tw,1.5);
       if(TH.tagSheen){ const sg=c.createLinearGradient(0,ty,0,ty+th*.5); sg.addColorStop(0,`rgba(255,255,255,${TH.tagSheen})`); sg.addColorStop(1,'rgba(255,255,255,0)'); c.fillStyle=sg; c.fillRect(tx,ty,tw,th*.5); }
       c.restore();
-      rr(c,tx+.75,ty+.75,tw-1.5,th-1.5,rad-1); c.strokeStyle=TH.tagBorder; c.lineWidth=1.5; c.stroke();
+      rr(c,tx+.75,ty+.75,tw-1.5,th-1.5,rad-1); c.strokeStyle=TH.tagBorder; c.lineWidth=1.5; c.stroke(); }
       text(c,S.day,tx+tw-26,cy-2,{w:700,s:ds,shadow:[0,2,TH.tagShadow]});
       if(S.date) text(c,S.date,tx+26,cy-2,{w:600,s:dts,color:TH.soft,dir:'ltr',align:'left',shadow:[0,2,TH.tagShadow]});
       c.restore(); } }

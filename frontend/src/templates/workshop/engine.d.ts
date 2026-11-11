@@ -1,6 +1,6 @@
 export type Format = "916" | "sq";
 export type Theme = "weekly" | "urgent";
-export type TagShape = "tilted" | "straight" | "pill";
+export type TagShape = "tilted" | "straight" | "pill" | "sticker";
 
 export type WorkshopState = {
   chip: string;

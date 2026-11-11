@@ -469,6 +469,7 @@ export function WorkshopAd() {
                 { value: "tilted", label: "Tilted" },
                 { value: "straight", label: "Straight" },
                 { value: "pill", label: "Pill" },
+                { value: "sticker", label: "Sticker" },
               ]}
             />
             <Slider label="Size" value={state.tagScale} min={70} max={150} step={1} unit="%" onChange={(tagScale) => update({ tagScale })} />
