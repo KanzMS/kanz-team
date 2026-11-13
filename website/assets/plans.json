@@ -1,0 +1,60 @@
+{
+  "_note": "Fallback only: the site reads pay.kanzms.com/api/site-plans first. These are the prices the paywall charges now; each deploy copies them from the paywall page (Radar/ops/website-plans.py), and test_website_plans_and_posts.py fails if this copy is neither the paywall's pre-rise nor its post-rise table.",
+  "periods": [
+    "monthly",
+    "quarterly",
+    "semiannual",
+    "annual"
+  ],
+  "prices": {
+    "EGP": {
+      "student": {
+        "monthly": 999,
+        "quarterly": 2799,
+        "semiannual": 5199,
+        "annual": 8999
+      },
+      "basic": {
+        "monthly": 1999,
+        "quarterly": 5599,
+        "semiannual": 10499,
+        "annual": 17999
+      },
+      "elite": {
+        "monthly": 4499,
+        "quarterly": 12599,
+        "semiannual": 23599,
+        "annual": 40499
+      }
+    },
+    "USD": {
+      "student": {
+        "monthly": 15.99,
+        "quarterly": 44.99,
+        "semiannual": 83.99,
+        "annual": 143.99
+      },
+      "basic": {
+        "monthly": 34.99,
+        "quarterly": 97.99,
+        "semiannual": 182.99,
+        "annual": 314.99
+      },
+      "elite": {
+        "monthly": 78.99,
+        "quarterly": 220.99,
+        "semiannual": 414.99,
+        "annual": 710.99
+      }
+    }
+  },
+  "checkout": {
+    "EGP": "https://pay.kanzms.com/",
+    "USD": {
+      "student": "https://kanzms.circle.so/checkout/student-plan",
+      "basic": "https://kanzms.circle.so/checkout/pro-basic",
+      "elite": "https://kanzms.circle.so/checkout/pro-elite"
+    },
+    "free": "https://kanzms.circle.so/c/start-here/"
+  }
+}
