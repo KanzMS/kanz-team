@@ -30,6 +30,10 @@ function Header() {
             <Icon name="gif_box" />
             Workshop CTA
           </NavLink>
+          <a href={siteUrl("website/")} className="nav-link">
+            <Icon name="language" />
+            Website
+          </a>
         </nav>
       </div>
     </header>

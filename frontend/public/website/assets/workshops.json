@@ -1,0 +1,11 @@
+{
+  "_help": "The website's workshop card (index.html, en/index.html). By default it shows the next Thursday at `time` in `timezone` (20:30 Cairo time, owner 2026-11-11), shown in the visitor's own time and in Cairo time. To name the next workshop, set next.datetime (ISO with offset, e.g. 2026-11-19T20:30:00+02:00) and its topics; it shows until 90 minutes after it starts. Put a Thursday with no workshop in `skip` as YYYY-MM-DD. Never put a discount code here (D-47).",
+  "timezone": "Africa/Cairo",
+  "time": "20:30",
+  "skip": [],
+  "next": {
+    "datetime": "",
+    "topic_ar": "",
+    "topic_en": ""
+  }
+}
