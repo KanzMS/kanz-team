@@ -1,0 +1,9 @@
+{
+  "_note": "The newest X posts the home page shows (single-post embeds). The deploy refreshes this file from X (Radar/ops/website-x-posts.py); the committed copy is the fallback.",
+  "handle": "RealKnzMS",
+  "posts": [
+    "2069779457624215951",
+    "1983148852455604539",
+    "1980904910674911525"
+  ]
+}

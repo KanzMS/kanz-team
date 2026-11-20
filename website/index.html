@@ -1,0 +1,586 @@
+<!doctype html>
+<html lang="en" dir="ltr" data-theme="dark">
+  <head>
+    <!-- GTM (GTM-PDWVXRTK) is left out of this local copy so opening it does not
+         send page views to production analytics. Restore the two GTM snippets from
+         original-index.html when shipping. -->
+    <script>try{var k=JSON.parse(localStorage.getItem("kanz_theme")||"null");if(k==="light"||k==="dark")document.documentElement.dataset.theme=k}catch(e){}</script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="google-site-verification" content="QMUXIbS5ABKsJi0EKaPTcity6veLt5ACkKJqCqWFVlM" />
+    <meta name="theme-color" content="#0b0e13" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f0f1f4" media="(prefers-color-scheme: light)" />
+    <title>Kanz | Market reading and technical analysis education</title>
+    <meta name="description" content="Kanz: market reading and technical analysis education for Arab investors. Market reads, listings analysed across Arab and US markets, a course from zero, and a weekly live workshop." />
+    <link rel="canonical" href="https://kanzms.com/en/" />
+    <link rel="alternate" hreflang="ar" href="https://kanzms.com/" />
+    <link rel="alternate" hreflang="en" href="https://kanzms.com/en/" />
+    <link rel="alternate" hreflang="x-default" href="https://kanzms.com/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://kanzms.com/en/" />
+    <meta property="og:title" content="Kanz | Market reading and technical analysis education" />
+    <meta property="og:description" content="Kanz: market reading and technical analysis education for Arab investors. Market reads, listings analysed across Arab and US markets, a course from zero, and a weekly live workshop." />
+    <meta property="og:image" content="https://kanzms.com/assets/og-en.png" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@RealKnzMS" />
+    <meta name="twitter:title" content="Kanz | Market reading and technical analysis education" />
+    <meta name="twitter:description" content="Kanz: market reading and technical analysis education for Arab investors. Market reads, listings analysed across Arab and US markets, a course from zero, and a weekly live workshop." />
+    <meta name="twitter:image" content="https://kanzms.com/assets/og-en.png" />
+    <link rel="icon" href="assets/fav.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://pay.kanzms.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,400,0..1,0&display=block" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/site.css" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Kanz",
+  "alternateName": ["KanzMS", "Kanz Markets", "كنز الأسواق العالمية"],
+  "url": "https://kanzms.com",
+  "logo": "https://kanzms.com/assets/logo.png",
+  "description": "Kanz: market reading and technical analysis education for Arab investors. Market reads, listings analysed across Arab and US markets, a course from zero, and a weekly live workshop.",
+  "founder": { "@type": "Person", "name": "Ahmed Shaaban", "alternateName": "أحمد شعبان", "jobTitle": "CEO" },
+  "sameAs": ["https://x.com/RealKnzMS", "https://www.instagram.com/realknzms", "https://www.facebook.com/realknzms", "https://www.tiktok.com/@kanzms"]
+}
+    </script>
+    <!-- The paywall's prices, as assets/plans.json: used when neither the paywall
+         nor the JSON file can be fetched (a file:// preview, an offline visit). -->
+    <script type="application/json" id="plans-snapshot">{
+  "_note": "Fallback only: the site reads pay.kanzms.com/api/site-plans first. These are the prices the paywall charges now; each deploy copies them from the paywall page (Radar/ops/website-plans.py), and test_website_plans_and_posts.py fails if this copy is neither the paywall's pre-rise nor its post-rise table.",
+  "periods": [
+    "monthly",
+    "quarterly",
+    "semiannual",
+    "annual"
+  ],
+  "prices": {
+    "EGP": {
+      "student": {
+        "monthly": 999,
+        "quarterly": 2799,
+        "semiannual": 5199,
+        "annual": 8999
+      },
+      "basic": {
+        "monthly": 1999,
+        "quarterly": 5599,
+        "semiannual": 10499,
+        "annual": 17999
+      },
+      "elite": {
+        "monthly": 4499,
+        "quarterly": 12599,
+        "semiannual": 23599,
+        "annual": 40499
+      }
+    },
+    "USD": {
+      "student": {
+        "monthly": 15.99,
+        "quarterly": 44.99,
+        "semiannual": 83.99,
+        "annual": 143.99
+      },
+      "basic": {
+        "monthly": 34.99,
+        "quarterly": 97.99,
+        "semiannual": 182.99,
+        "annual": 314.99
+      },
+      "elite": {
+        "monthly": 78.99,
+        "quarterly": 220.99,
+        "semiannual": 414.99,
+        "annual": 710.99
+      }
+    }
+  },
+  "checkout": {
+    "EGP": "https://pay.kanzms.com/",
+    "USD": {
+      "student": "https://kanzms.circle.so/checkout/student-plan",
+      "basic": "https://kanzms.circle.so/checkout/pro-basic",
+      "elite": "https://kanzms.circle.so/checkout/pro-elite"
+    },
+    "free": "https://kanzms.circle.so/c/start-here/"
+  }
+}</script>
+  </head>
+  <body id="top">
+    <!-- Brand marks only (Simple Icons, CC0). Every UI icon is Material Symbols. -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+      <symbol id="b-x" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></symbol>
+      <symbol id="b-tiktok" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></symbol>
+      <symbol id="b-instagram" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></symbol>
+      <symbol id="b-facebook" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></symbol>
+    </svg>
+    <a class="skip" href="#main">Skip to content</a>
+    <p class="top-note">Kanz provides market analysis for educational and informational purposes only. It is not investment advice.</p>
+
+    <header class="hdr" data-hdr>
+      <div class="wrap hdr-row">
+        <a class="brand" href="#top" aria-label="Kanz, back to top">
+          <img src="assets/logo.png" alt="" width="34" height="34" />
+          <span>Kanz</span>
+        </a>
+        <nav class="nav" aria-label="Main">
+          <ul>
+            <li><a href="#inside" data-spy>What you get</a></li>
+            <li><a href="#method" data-spy>Method</a></li>
+            <li><a href="#academy" data-spy>Academy</a></li>
+            <li><a href="#plans" data-spy>Plans</a></li>
+            <li><a href="#workshops" data-spy>Workshops</a></li>
+            <li><a href="https://staging.kanzms-bgw.pages.dev/en/blog/index.html">Blog</a></li>
+            <li><a href="#faq" data-spy>FAQ</a></li>
+          </ul>
+        </nav>
+        <div class="hdr-end">
+          <a class="icon-btn" href="https://staging.kanzms-bgw.pages.dev/index.html" hreflang="ar" lang="ar" aria-label="Arabic" data-track="cta_click" data-section="header" data-target="language">عربي</a>
+          <button class="icon-btn" type="button" data-theme-toggle aria-pressed="false" aria-label="Switch light or dark">
+            <span class="ms theme-ico-dark" aria-hidden="true">light_mode</span><span class="ms theme-ico-light" aria-hidden="true">dark_mode</span>
+          </button>
+          <a class="btn btn-sm btn-ghost signin" href="https://radar.kanzms.com/" data-track="cta_click" data-section="header" data-target="radar_signin">Sign in</a>
+          <a class="btn btn-sm btn-gold see-plans" href="#plans" data-track="cta_click" data-section="header" data-target="plans">See the plans</a>
+          <button class="icon-btn menu-btn" type="button" data-menu aria-expanded="false" aria-controls="drawer" aria-label="Menu"><span class="ms" aria-hidden="true" data-menu-ico>menu</span></button>
+        </div>
+      </div>
+      <div class="drawer" id="drawer">
+        <div class="drawer-in"><div class="wrap">
+          <ul>
+            <li><a class="d-link" href="#inside">What you get<span class="ms flip" aria-hidden="true">chevron_right</span></a></li>
+            <li><a class="d-link" href="#method">Method<span class="ms flip" aria-hidden="true">chevron_right</span></a></li>
+            <li><a class="d-link" href="#academy">Academy<span class="ms flip" aria-hidden="true">chevron_right</span></a></li>
+            <li><a class="d-link" href="#plans">Plans<span class="ms flip" aria-hidden="true">chevron_right</span></a></li>
+            <li><a class="d-link" href="#workshops">Workshops<span class="ms flip" aria-hidden="true">chevron_right</span></a></li>
+            <li><a class="d-link" href="https://staging.kanzms-bgw.pages.dev/en/blog/index.html">Blog<span class="ms flip" aria-hidden="true">chevron_right</span></a></li>
+            <li><a class="d-link" href="#faq">FAQ<span class="ms flip" aria-hidden="true">chevron_right</span></a></li>
+          </ul>
+          <div class="d-actions">
+            <a class="btn" href="https://radar.kanzms.com/" data-track="cta_click" data-section="menu" data-target="radar_signin">Sign in</a>
+            <a class="btn btn-gold" href="#plans" data-track="cta_click" data-section="menu" data-target="plans">See the plans</a>
+          </div>
+        </div></div>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- 1. Hero -->
+      <section class="hero" id="hero" data-section="hero">
+        <div class="wrap hero-grid">
+          <div>
+            <a class="hero-badge rv" href="#workshops"><span class="tag"><span class="live-dot" aria-hidden="true"></span>Live</span>Every Thursday with Ahmed Shaaban<span class="ms flip" aria-hidden="true">arrow_forward</span></a>
+            <h1 class="rv" style="--d:.05s">Market reading and <span class="gold">technical analysis</span> education for Arab investors</h1>
+            <p class="sub rv" style="--d:.1s">Market reads from the analysts, listings analysed across Arab and US markets, and a course that starts from zero.</p>
+            <div class="hero-ctas rv" style="--d:.15s">
+              <a class="btn btn-gold btn-lg" href="#plans" data-track="cta_click" data-target="plans">See the plans<span class="ms flip nudge" aria-hidden="true">arrow_forward</span></a>
+              <a class="btn btn-lg" href="https://kanzms.circle.so/c/start-here/" target="_blank" rel="noopener" data-track="cta_click" data-target="free_community">Explore the free community</a>
+            </div>
+            <dl class="hero-stats rv" style="--d:.2s">
+              <div><dt class="num ltr" data-count="10000" data-suffix="+">10,000+</dt><dd>Active Members</dd></div>
+              <div><dt class="num ltr" data-count="104">104</dt><dd>Countries Worldwide</dd></div>
+              <div><dt class="num ltr" data-count="1000" data-suffix="+">1,000+</dt><dd>Analyses Published</dd></div>
+            </dl>
+            <p class="hero-note rv" style="--d:.25s"><span class="ms" aria-hidden="true">info</span>Educational technical analysis. Not a recommendation to buy or sell.</p>
+          </div>
+          <figure class="hero-shot rv" style="--d:.1s">
+            <div class="frame browser">
+              <div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span class="url"><span class="ms">lock</span>radar.kanzms.com/pulse</span><span class="spacer"></span></div>
+              <div class="mk-wrap" role="img" aria-label="An illustration of Pulse, the market read in the Kanz Radar" style="aspect-ratio:16 / 10"><div class="mock mock-pulse is-hero"><div class="mk-top"><i class="mk-logo"></i><div class="mk-tabs"><i class="mk-tab on"></i><i class="mk-tab"></i><i class="mk-tab"></i><i class="mk-tab"></i><i class="mk-tab"></i></div><span class="mk-install"><span class="ms" aria-hidden="true">install_mobile</span><i></i></span><i class="mk-icon-c"></i><i class="mk-icon-c"></i><i class="mk-avatar"></i></div><div class="mk-note"><i class="mk-line" style="width:26%"></i></div><div class="mk-tape"><div class="mk-tape-i"><i class="mk-brand c-blue xs"></i><i class="mk-line" style="width:60%"></i><span class="mk-chg up"><span class="ms" aria-hidden="true">trending_up</span><i></i></span></div><div class="mk-tape-i"><i class="mk-brand c-gold xs"></i><i class="mk-line" style="width:45%"></i><span class="mk-chg up"><span class="ms" aria-hidden="true">trending_up</span><i></i></span></div><div class="mk-tape-i"><i class="mk-brand c-cyan xs"></i><i class="mk-line" style="width:70%"></i><span class="mk-chg up"><span class="ms" aria-hidden="true">trending_up</span><i></i></span></div><div class="mk-tape-i"><i class="mk-brand c-ink xs"></i><i class="mk-line" style="width:50%"></i><span class="mk-chg down"><span class="ms" aria-hidden="true">trending_down</span><i></i></span></div><div class="mk-tape-i"><i class="mk-brand c-violet xs"></i><i class="mk-line" style="width:55%"></i><span class="mk-chg up"><span class="ms" aria-hidden="true">trending_up</span><i></i></span></div><div class="mk-tape-i"><i class="mk-brand c-teal xs"></i><i class="mk-line" style="width:65%"></i><span class="mk-chg up"><span class="ms" aria-hidden="true">trending_up</span><i></i></span></div><div class="mk-tape-i"><i class="mk-brand c-amber xs"></i><i class="mk-line" style="width:40%"></i><span class="mk-chg up"><span class="ms" aria-hidden="true">trending_up</span><i></i></span></div></div><div class="mk-panel"><div class="mk-main"><div class="mk-gauge-card"><svg class="mk-gauge" viewBox="0 0 120 70" aria-hidden="true"><path class="seg s0" d="M12.0,58.1 A48,48 0 0 1 20.1,33.4"/><path class="seg s1" d="M22.3,30.3 A48,48 0 0 1 43.4,15.0"/><path class="seg s2" d="M47.0,13.8 A48,48 0 0 1 73.0,13.8"/><path class="seg s3" d="M76.6,15.0 A48,48 0 0 1 97.7,30.3"/><path class="seg s4" d="M99.9,33.4 A48,48 0 0 1 108.0,58.1"/><g class="needle"><line x1="60" y1="60" x2="60" y2="22"/><circle cx="60" cy="60" r="5"/></g></svg><i class="mk-gauge-fig"></i><i class="mk-word"></i><i class="mk-line" style="width:55%"></i></div><div class="mk-read"><div class="mk-chips"><i class="mk-chip gold"></i><i class="mk-chip"></i></div><i class="mk-title up" style="width:72%"></i><div class="mk-para"><i class="mk-line" style="width:96%"></i><i class="mk-line" style="width:92%"></i><i class="mk-line" style="width:88%"></i><i class="mk-line" style="width:94%"></i><i class="mk-line" style="width:70%"></i></div></div></div><div class="mk-cards"><div class="mk-card"><div class="mk-card-h"><i class="mk-line sm" style="width:45%"></i></div><i class="mk-fig" style="width:70%"></i><div class="mk-card-f"><svg class="mk-spark up" viewBox="0 0 100 30" preserveAspectRatio="none" aria-hidden="true"><path class="ln" d="M0.0,28.0 L4.3,24.6 L8.7,24.8 L13.0,19.9 L17.4,22.0 L21.7,21.3 L26.1,17.4 L30.4,19.9 L34.8,17.3 L39.1,20.0 L43.5,18.8 L47.8,16.2 L52.2,15.7 L56.5,10.8 L60.9,6.0 L65.2,5.5 L69.6,4.2 L73.9,2.0 L78.3,4.5 L82.6,7.1 L87.0,10.2 L91.3,10.2 L95.7,13.0 L100.0,14.7" pathLength="1"/></svg><i class="mk-pct up"></i></div></div><div class="mk-card"><div class="mk-card-h"><i class="mk-line sm" style="width:45%"></i></div><i class="mk-fig" style="width:70%"></i><div class="mk-card-f"><svg class="mk-spark down" viewBox="0 0 100 30" preserveAspectRatio="none" aria-hidden="true"><path class="ln" d="M0.0,9.0 L4.3,9.2 L8.7,7.9 L13.0,12.7 L17.4,16.7 L21.7,9.8 L26.1,15.2 L30.4,15.2 L34.8,19.7 L39.1,17.4 L43.5,14.1 L47.8,8.0 L52.2,2.0 L56.5,7.5 L60.9,11.2 L65.2,15.3 L69.6,18.5 L73.9,17.7 L78.3,18.7 L82.6,23.6 L87.0,28.0 L91.3,13.9 L95.7,22.3 L100.0,10.2" pathLength="1"/></svg><i class="mk-pct down"></i></div></div><div class="mk-card"><div class="mk-card-h"><i class="mk-line sm" style="width:45%"></i></div><i class="mk-fig" style="width:70%"></i><div class="mk-card-f"><svg class="mk-spark up" viewBox="0 0 100 30" preserveAspectRatio="none" aria-hidden="true"><path class="ln" d="M0.0,23.6 L4.3,24.1 L8.7,21.8 L13.0,21.9 L17.4,27.7 L21.7,26.1 L26.1,28.0 L30.4,25.0 L34.8,20.9 L39.1,14.4 L43.5,12.4 L47.8,12.3 L52.2,9.7 L56.5,7.2 L60.9,11.9 L65.2,12.3 L69.6,14.1 L73.9,10.7 L78.3,9.4 L82.6,7.4 L87.0,4.0 L91.3,2.0 L95.7,5.5 L100.0,6.8" pathLength="1"/></svg><i class="mk-pct up"></i></div></div><div class="mk-card"><div class="mk-card-h"><i class="mk-line sm" style="width:45%"></i></div><i class="mk-fig" style="width:70%"></i><div class="mk-card-f"><svg class="mk-spark up" viewBox="0 0 100 30" preserveAspectRatio="none" aria-hidden="true"><path class="ln" d="M0.0,28.0 L4.3,27.3 L8.7,25.4 L13.0,26.4 L17.4,23.6 L21.7,21.8 L26.1,20.6 L30.4,19.9 L34.8,17.4 L39.1,16.1 L43.5,14.5 L47.8,16.5 L52.2,15.7 L56.5,12.1 L60.9,10.8 L65.2,11.8 L69.6,12.1 L73.9,9.2 L78.3,5.0 L82.6,5.5 L87.0,3.3 L91.3,5.2 L95.7,4.7 L100.0,2.0" pathLength="1"/></svg><i class="mk-pct up"></i></div></div><div class="mk-card"><div class="mk-card-h"><i class="mk-line sm" style="width:45%"></i></div><i class="mk-fig" style="width:70%"></i><div class="mk-card-f"><svg class="mk-spark down" viewBox="0 0 100 30" preserveAspectRatio="none" aria-hidden="true"><path class="ln" d="M0.0,17.2 L4.3,16.4 L8.7,28.0 L13.0,20.9 L17.4,3.7 L21.7,2.3 L26.1,5.9 L30.4,16.8 L34.8,16.0 L39.1,20.3 L43.5,17.1 L47.8,25.5 L52.2,18.8 L56.5,9.8 L60.9,19.2 L65.2,16.2 L69.6,8.9 L73.9,4.8 L78.3,3.1 L82.6,3.6 L87.0,2.6 L91.3,2.0 L95.7,6.1 L100.0,8.8" pathLength="1"/></svg><i class="mk-pct down"></i></div></div></div></div></div></div>
+            </div>
+            <figcaption class="frame-cap"><span class="ms" aria-hidden="true">auto_awesome_mosaic</span>An illustration of Pulse in the Kanz Radar. The Radar itself is in Arabic and English.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <div class="coverage" aria-label="Markets covered">
+        <div class="wrap coverage-row">
+          <span class="label">Markets covered</span>
+          <ul>
+            <li><span class="ms" aria-hidden="true">location_on</span>Egypt</li>
+            <li><span class="ms" aria-hidden="true">location_on</span>Saudi Arabia</li>
+            <li><span class="ms" aria-hidden="true">location_on</span>Kuwait</li>
+            <li><span class="ms" aria-hidden="true">location_on</span>UAE</li>
+            <li><span class="ms" aria-hidden="true">location_on</span>Qatar</li>
+            <li><span class="ms" aria-hidden="true">public</span>US and global markets</li>
+            <li><span class="ms" aria-hidden="true">diamond</span>Metals</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 2. What you get -->
+      <section class="sec" id="inside" data-section="inside">
+        <div class="wrap">
+          <div class="sec-head rv">
+            <h2>See the product before you subscribe</h2>
+            <p class="lead">Kanz is a Radar you use every week, with the community on Circle around it. Here is what each part does.</p>
+          </div>
+          <div class="tiles">
+            <article class="card tile rv">
+              <div class="shot"><div class="mk-wrap" role="img" aria-label="An illustration of Pulse" style="aspect-ratio:16 / 9.5"><div class="mock mock-pulse"><div class="mk-top"><i class="mk-logo"></i><div class="mk-tabs"><i class="mk-tab on"></i><i class="mk-tab"></i><i class="mk-tab"></i><i class="mk-tab"></i><i class="mk-tab"></i></div><span class="mk-install"><span class="ms" aria-hidden="true">install_mobile</span><i></i></span><i class="mk-icon-c"></i><i class="mk-icon-c"></i><i class="mk-avatar"></i></div><div class="mk-note"><i class="mk-line" style="width:26%"></i></div><div class="mk-tape"><div class="mk-tape-i"><i class="mk-brand c-blue xs"></i><i class="mk-line" style="width:60%"></i><span class="mk-chg up"><span class="ms" aria-hidden="true">trending_up</span><i></i></span></div><div class="mk-tape-i"><i class="mk-brand c-gold xs"></i><i class="mk-line" style="width:45%"></i><span class="mk-chg up"><span class="ms" aria-hidden="true">trending_up</span><i></i></span></div><div class="mk-tape-i"><i class="mk-brand c-cyan xs"></i><i class="mk-line" style="width:70%"></i><span class="mk-chg up"><span class="ms" aria-hidden="true">trending_up</span><i></i></span></div><div class="mk-tape-i"><i class="mk-brand c-ink xs"></i><i class="mk-line" style="width:50%"></i><span class="mk-chg down"><span class="ms" aria-hidden="true">trending_down</span><i></i></span></div></div><div class="mk-panel"><div class="mk-main"><div class="mk-gauge-card"><svg class="mk-gauge" viewBox="0 0 120 70" aria-hidden="true"><path class="seg s0" d="M12.0,58.1 A48,48 0 0 1 20.1,33.4"/><path class="seg s1" d="M22.3,30.3 A48,48 0 0 1 43.4,15.0"/><path class="seg s2" d="M47.0,13.8 A48,48 0 0 1 73.0,13.8"/><path class="seg s3" d="M76.6,15.0 A48,48 0 0 1 97.7,30.3"/><path class="seg s4" d="M99.9,33.4 A48,48 0 0 1 108.0,58.1"/><g class="needle"><line x1="60" y1="60" x2="60" y2="22"/><circle cx="60" cy="60" r="5"/></g></svg><i class="mk-gauge-fig"></i><i class="mk-word"></i><i class="mk-line" style="width:55%"></i></div><div class="mk-read"><div class="mk-chips"><i class="mk-chip gold"></i><i class="mk-chip"></i></div><i class="mk-title up" style="width:72%"></i><div class="mk-para"><i class="mk-line" style="width:96%"></i><i class="mk-line" style="width:92%"></i><i class="mk-line" style="width:88%"></i><i class="mk-line" style="width:94%"></i><i class="mk-line" style="width:70%"></i></div></div></div><div class="mk-cards"><div class="mk-card"><div class="mk-card-h"><i class="mk-line sm" style="width:45%"></i></div><i class="mk-fig" style="width:70%"></i><div class="mk-card-f"><svg class="mk-spark up" viewBox="0 0 100 30" preserveAspectRatio="none" aria-hidden="true"><path class="ln" d="M0.0,28.0 L4.3,24.6 L8.7,24.8 L13.0,19.9 L17.4,22.0 L21.7,21.3 L26.1,17.4 L30.4,19.9 L34.8,17.3 L39.1,20.0 L43.5,18.8 L47.8,16.2 L52.2,15.7 L56.5,10.8 L60.9,6.0 L65.2,5.5 L69.6,4.2 L73.9,2.0 L78.3,4.5 L82.6,7.1 L87.0,10.2 L91.3,10.2 L95.7,13.0 L100.0,14.7" pathLength="1"/></svg><i class="mk-pct up"></i></div></div><div class="mk-card"><div class="mk-card-h"><i class="mk-line sm" style="width:45%"></i></div><i class="mk-fig" style="width:70%"></i><div class="mk-card-f"><svg class="mk-spark down" viewBox="0 0 100 30" preserveAspectRatio="none" aria-hidden="true"><path class="ln" d="M0.0,9.0 L4.3,9.2 L8.7,7.9 L13.0,12.7 L17.4,16.7 L21.7,9.8 L26.1,15.2 L30.4,15.2 L34.8,19.7 L39.1,17.4 L43.5,14.1 L47.8,8.0 L52.2,2.0 L56.5,7.5 L60.9,11.2 L65.2,15.3 L69.6,18.5 L73.9,17.7 L78.3,18.7 L82.6,23.6 L87.0,28.0 L91.3,13.9 L95.7,22.3 L100.0,10.2" pathLength="1"/></svg><i class="mk-pct down"></i></div></div><div class="mk-card"><div class="mk-card-h"><i class="mk-line sm" style="width:45%"></i></div><i class="mk-fig" style="width:70%"></i><div class="mk-card-f"><svg class="mk-spark up" viewBox="0 0 100 30" preserveAspectRatio="none" aria-hidden="true"><path class="ln" d="M0.0,23.6 L4.3,24.1 L8.7,21.8 L13.0,21.9 L17.4,27.7 L21.7,26.1 L26.1,28.0 L30.4,25.0 L34.8,20.9 L39.1,14.4 L43.5,12.4 L47.8,12.3 L52.2,9.7 L56.5,7.2 L60.9,11.9 L65.2,12.3 L69.6,14.1 L73.9,10.7 L78.3,9.4 L82.6,7.4 L87.0,4.0 L91.3,2.0 L95.7,5.5 L100.0,6.8" pathLength="1"/></svg><i class="mk-pct up"></i></div></div></div></div></div></div></div>
+              <div class="body">
+                <div class="t-head"><span class="ms" aria-hidden="true">speed</span><h3>Pulse</h3></div>
+                <p>The market read: where each market stands, with the sentiment gauge.</p>
+                <div class="plan-tag"><span class="chip">Pro Basic: Arab markets</span><span class="chip chip-gold">Pro Elite: all markets</span></div>
+              </div>
+            </article>
+            <article class="card tile rv" style="--d:.06s">
+              <div class="shot"><div class="mk-wrap" role="img" aria-label="An illustration of a listing page: the chart with its target, level and invalidation lines" style="aspect-ratio:16 / 9.5"><div class="mock mock-listing"><div class="mk-top"><i class="mk-logo"></i><div class="mk-tabs"><i class="mk-tab"></i><i class="mk-tab on"></i><i class="mk-tab"></i><i class="mk-tab"></i></div><span class="mk-install"><span class="ms" aria-hidden="true">install_mobile</span><i></i></span><i class="mk-icon-c"></i><i class="mk-icon-c"></i><i class="mk-avatar"></i></div><div class="mk-tk-head"><i class="mk-brand c-ink lg"></i><div class="mk-tk-id"><i class="mk-fig" style="width:34%"></i><i class="mk-line" style="width:22%"></i></div><span class="mk-watch"><span class="ms fill" aria-hidden="true">star</span><i></i></span><div class="mk-price"><i class="mk-fig big" style="width:100%"></i><span class="mk-chg up"><span class="ms" aria-hidden="true">trending_up</span><i></i></span></div></div><div class="mk-subtabs"><i class="on"></i><i></i><i></i><i></i><i></i></div><div class="mk-split"><div class="mk-chart"><svg class="mk-candles" viewBox="0 0 400 180" preserveAspectRatio="none" aria-hidden="true"><line class="wick" x1="4.8" x2="4.8" y1="118.7" y2="129.6"/><rect class="dn" x="2.1" y="123.0" width="5.3" height="4.7" rx=".6"/><line class="wick" x1="14.3" x2="14.3" y1="119.9" y2="135.1"/><rect class="dn" x="11.6" y="127.7" width="5.3" height="5.6" rx=".6"/><line class="wick" x1="23.8" x2="23.8" y1="114.2" y2="141.9"/><rect class="up" x="21.1" y="117.7" width="5.3" height="15.6" rx=".6"/><line class="wick" x1="33.3" x2="33.3" y1="111.7" y2="119.3"/><rect class="up" x="30.7" y="115.0" width="5.3" height="2.8" rx=".6"/><line class="wick" x1="42.9" x2="42.9" y1="107.9" y2="144.8"/><rect class="dn" x="40.2" y="115.0" width="5.3" height="25.6" rx=".6"/><line class="wick" x1="52.4" x2="52.4" y1="120.0" y2="155.1"/><rect class="up" x="49.7" y="134.1" width="5.3" height="6.5" rx=".6"/><line class="wick" x1="61.9" x2="61.9" y1="130.2" y2="150.8"/><rect class="dn" x="59.2" y="134.1" width="5.3" height="14.1" rx=".6"/><line class="wick" x1="71.4" x2="71.4" y1="143.9" y2="155.2"/><rect class="dn" x="68.8" y="148.2" width="5.3" height="1.6" rx=".6"/><line class="wick" x1="81.0" x2="81.0" y1="142.9" y2="155.4"/><rect class="up" x="78.3" y="146.2" width="5.3" height="3.6" rx=".6"/><line class="wick" x1="90.5" x2="90.5" y1="117.0" y2="156.2"/><rect class="up" x="87.8" y="121.7" width="5.3" height="24.5" rx=".6"/><line class="wick" x1="100.0" x2="100.0" y1="115.5" y2="134.7"/><rect class="dn" x="97.3" y="121.7" width="5.3" height="10.1" rx=".6"/><line class="wick" x1="109.5" x2="109.5" y1="126.5" y2="136.4"/><rect class="dn" x="106.9" y="131.8" width="5.3" height="2.5" rx=".6"/><line class="wick" x1="119.0" x2="119.0" y1="126.3" y2="146.2"/><rect class="dn" x="116.4" y="134.3" width="5.3" height="7.6" rx=".6"/><line class="wick" x1="128.6" x2="128.6" y1="117.9" y2="143.9"/><rect class="up" x="125.9" y="124.7" width="5.3" height="17.2" rx=".6"/><line class="wick" x1="138.1" x2="138.1" y1="106.9" y2="125.1"/><rect class="up" x="135.4" y="119.3" width="5.3" height="5.4" rx=".6"/><line class="wick" x1="147.6" x2="147.6" y1="84.1" y2="122.0"/><rect class="up" x="145.0" y="100.9" width="5.3" height="18.4" rx=".6"/><line class="wick" x1="157.1" x2="157.1" y1="94.0" y2="107.5"/><rect class="dn" x="154.5" y="100.9" width="5.3" height="2.5" rx=".6"/><line class="wick" x1="166.7" x2="166.7" y1="91.1" y2="112.1"/><rect class="dn" x="164.0" y="103.4" width="5.3" height="1.8" rx=".6"/><line class="wick" x1="176.2" x2="176.2" y1="88.3" y2="117.2"/><rect class="up" x="173.5" y="96.2" width="5.3" height="9.0" rx=".6"/><line class="wick" x1="185.7" x2="185.7" y1="86.6" y2="107.0"/><rect class="up" x="183.0" y="87.6" width="5.3" height="8.6" rx=".6"/><line class="wick" x1="195.2" x2="195.2" y1="70.1" y2="91.4"/><rect class="up" x="192.6" y="75.2" width="5.3" height="12.4" rx=".6"/><line class="wick" x1="204.8" x2="204.8" y1="67.2" y2="95.2"/><rect class="dn" x="202.1" y="75.2" width="5.3" height="15.5" rx=".6"/><line class="wick" x1="214.3" x2="214.3" y1="51.5" y2="102.9"/><rect class="up" x="211.6" y="68.4" width="5.3" height="22.3" rx=".6"/><line class="wick" x1="223.8" x2="223.8" y1="49.6" y2="73.2"/><rect class="up" x="221.1" y="61.6" width="5.3" height="6.8" rx=".6"/><line class="wick" x1="233.3" x2="233.3" y1="40.6" y2="89.5"/><rect class="dn" x="230.7" y="61.6" width="5.3" height="24.9" rx=".6"/><line class="wick" x1="242.9" x2="242.9" y1="77.2" y2="102.3"/><rect class="dn" x="240.2" y="86.5" width="5.3" height="7.7" rx=".6"/><line class="wick" x1="252.4" x2="252.4" y1="73.3" y2="96.2"/><rect class="up" x="249.7" y="74.6" width="5.3" height="19.6" rx=".6"/><line class="wick" x1="261.9" x2="261.9" y1="51.7" y2="79.8"/><rect class="up" x="259.2" y="64.9" width="5.3" height="9.7" rx=".6"/><line class="wick" x1="271.4" x2="271.4" y1="49.5" y2="78.0"/><rect class="up" x="268.8" y="54.0" width="5.3" height="10.9" rx=".6"/><line class="wick" x1="281.0" x2="281.0" y1="23.8" y2="58.4"/><rect class="up" x="278.3" y="31.8" width="5.3" height="22.2" rx=".6"/><line class="wick" x1="290.5" x2="290.5" y1="26.5" y2="64.8"/><rect class="dn" x="287.8" y="31.8" width="5.3" height="26.0" rx=".6"/><line class="wick" x1="300.0" x2="300.0" y1="56.3" y2="89.9"/><rect class="dn" x="297.3" y="57.8" width="5.3" height="23.6" rx=".6"/><line class="wick" x1="309.5" x2="309.5" y1="68.0" y2="102.2"/><rect class="dn" x="306.9" y="81.4" width="5.3" height="16.2" rx=".6"/><line class="wick" x1="319.0" x2="319.0" y1="93.9" y2="103.0"/><rect class="up" x="316.4" y="96.6" width="5.3" height="1.2" rx=".6"/><line class="wick" x1="328.6" x2="328.6" y1="82.0" y2="102.1"/><rect class="up" x="325.9" y="91.5" width="5.3" height="5.0" rx=".6"/><line class="wick" x1="338.1" x2="338.1" y1="82.9" y2="94.7"/><rect class="dn" x="335.4" y="91.5" width="5.3" height="2.9" rx=".6"/><line class="wick" x1="347.6" x2="347.6" y1="86.6" y2="116.5"/><rect class="dn" x="345.0" y="94.4" width="5.3" height="9.8" rx=".6"/><line class="wick" x1="357.1" x2="357.1" y1="92.7" y2="108.7"/><rect class="dn" x="354.5" y="104.2" width="5.3" height="3.4" rx=".6"/><line class="wick" x1="366.7" x2="366.7" y1="104.1" y2="119.3"/><rect class="up" x="364.0" y="106.6" width="5.3" height="1.2" rx=".6"/><line class="wick" x1="376.2" x2="376.2" y1="96.1" y2="129.1"/><rect class="dn" x="373.5" y="106.6" width="5.3" height="12.0" rx=".6"/><line class="wick" x1="385.7" x2="385.7" y1="113.3" y2="136.4"/><rect class="dn" x="383.0" y="118.5" width="5.3" height="8.4" rx=".6"/><line class="wick" x1="395.2" x2="395.2" y1="108.1" y2="128.2"/><rect class="up" x="392.6" y="111.0" width="5.3" height="16.0" rx=".6"/><line class="lvl gold" x1="0" x2="400" y1="18.0" y2="18.0"/><line class="lvl" x1="0" x2="400" y1="70.1" y2="70.1"/><line class="lvl dim" x1="0" x2="400" y1="140.1" y2="140.1"/></svg><span class="mk-lvl gold" style="top:16.4%">Target</span><span class="mk-lvl" style="top:40.8%">Level</span><span class="mk-lvl dim" style="top:73.4%">Invalidation</span></div><div class="mk-side"><div class="mk-side-h"><span class="ms " aria-hidden="true">insights</span><i class="mk-line" style="width:50%"></i></div><div class="mk-kv"><i class="mk-line" style="width:40%"></i><i class="mk-fig sm" style="width:28%"></i></div><div class="mk-kv"><i class="mk-line" style="width:40%"></i><i class="mk-fig sm" style="width:28%"></i></div><div class="mk-kv"><i class="mk-line" style="width:40%"></i><i class="mk-fig sm" style="width:28%"></i></div><div class="mk-kv"><i class="mk-line" style="width:40%"></i><i class="mk-fig sm" style="width:28%"></i></div><div class="mk-para"><i class="mk-line" style="width:95%"></i><i class="mk-line" style="width:85%"></i><i class="mk-line" style="width:60%"></i></div></div></div></div></div></div>
+              <div class="body">
+                <div class="t-head"><span class="ms" aria-hidden="true">candlestick_chart</span><h3>Listing analysis</h3></div>
+                <p>A page for every listing: the chart, the profile, and Kanz&#x27;s technical and fundamental analysis.</p>
+                <div class="plan-tag"><span class="chip">Pro Basic: Arab markets</span><span class="chip chip-gold">Pro Elite: all markets</span></div>
+              </div>
+            </article>
+            <article class="card tile rv">
+              <div class="shot"><div class="mk-wrap" role="img" aria-label="An illustration of the Exhibition: listing cards with stars and alerts" style="aspect-ratio:16 / 9.5"><div class="mock mock-exhibition"><div class="mk-top"><i class="mk-logo"></i><div class="mk-tabs"><i class="mk-tab"></i><i class="mk-tab"></i><i class="mk-tab on"></i><i class="mk-tab"></i></div><span class="mk-install"><span class="ms" aria-hidden="true">install_mobile</span><i></i></span><i class="mk-icon-c"></i><i class="mk-icon-c"></i><i class="mk-avatar"></i></div><div class="mk-filters"><i class="mk-filter on"></i><i class="mk-filter"></i><i class="mk-filter"></i><i class="mk-filter"></i><span class="mk-bell"><span class="ms " aria-hidden="true">notifications_active</span></span></div><div class="mk-xgrid"><div class="mk-xcard"><div class="mk-xcard-h"><span class="mk-chg up"><span class="ms" aria-hidden="true">trending_up</span><i></i></span><div class="mk-tk-id end"><i class="mk-fig sm" style="width:45%"></i><i class="mk-line" style="width:70%"></i></div><i class="mk-brand c-blue sm"></i></div><svg class="mk-spark up" viewBox="0 0 100 30" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="gup90" x1="0" y1="0" x2="0" y2="1"><stop class="st0" offset="0"/><stop class="st1" offset="1"/></linearGradient></defs><path class="area" d="M0.0,3.8 L4.3,2.0 L8.7,4.2 L13.0,7.8 L17.4,9.6 L21.7,11.7 L26.1,18.4 L30.4,15.8 L34.8,14.3 L39.1,16.5 L43.5,16.3 L47.8,14.6 L52.2,14.4 L56.5,15.0 L60.9,18.4 L65.2,25.9 L69.6,23.6 L73.9,26.1 L78.3,25.0 L82.6,26.4 L87.0,25.8 L91.3,27.7 L95.7,27.6 L100.0,28.0 L100,30 L0,30 Z" fill="url(#gup90)"/><path class="ln" d="M0.0,3.8 L4.3,2.0 L8.7,4.2 L13.0,7.8 L17.4,9.6 L21.7,11.7 L26.1,18.4 L30.4,15.8 L34.8,14.3 L39.1,16.5 L43.5,16.3 L47.8,14.6 L52.2,14.4 L56.5,15.0 L60.9,18.4 L65.2,25.9 L69.6,23.6 L73.9,26.1 L78.3,25.0 L82.6,26.4 L87.0,25.8 L91.3,27.7 L95.7,27.6 L100.0,28.0" pathLength="1"/></svg><div class="mk-xcard-p"><i class="mk-fig" style="width:42%"></i></div><div class="mk-xcard-f"><span class="ms " aria-hidden="true">star_outline</span><i class="mk-alpha">α</i><i class="mk-line" style="width:30%;margin-inline-start:auto"></i></div></div><div class="mk-xcard"><div class="mk-xcard-h"><span class="mk-chg up"><span class="ms" aria-hidden="true">trending_up</span><i></i></span><div class="mk-tk-id end"><i class="mk-fig sm" style="width:45%"></i><i class="mk-line" style="width:70%"></i></div><i class="mk-brand c-gold sm"></i></div><svg class="mk-spark up" viewBox="0 0 100 30" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="gup91" x1="0" y1="0" x2="0" y2="1"><stop class="st0" offset="0"/><stop class="st1" offset="1"/></linearGradient></defs><path class="area" d="M0.0,10.1 L4.3,8.2 L8.7,8.9 L13.0,10.9 L17.4,2.0 L21.7,4.3 L26.1,4.1 L30.4,8.8 L34.8,6.8 L39.1,9.4 L43.5,12.4 L47.8,14.7 L52.2,26.1 L56.5,24.9 L60.9,22.8 L65.2,14.8 L69.6,14.1 L73.9,15.6 L78.3,10.1 L82.6,9.9 L87.0,13.2 L91.3,13.8 L95.7,24.3 L100.0,28.0 L100,30 L0,30 Z" fill="url(#gup91)"/><path class="ln" d="M0.0,10.1 L4.3,8.2 L8.7,8.9 L13.0,10.9 L17.4,2.0 L21.7,4.3 L26.1,4.1 L30.4,8.8 L34.8,6.8 L39.1,9.4 L43.5,12.4 L47.8,14.7 L52.2,26.1 L56.5,24.9 L60.9,22.8 L65.2,14.8 L69.6,14.1 L73.9,15.6 L78.3,10.1 L82.6,9.9 L87.0,13.2 L91.3,13.8 L95.7,24.3 L100.0,28.0" pathLength="1"/></svg><div class="mk-xcard-p"><i class="mk-fig" style="width:42%"></i></div><div class="mk-xcard-f"><span class="ms " aria-hidden="true">star_outline</span><i class="mk-line" style="width:30%;margin-inline-start:auto"></i></div></div><div class="mk-xcard sel"><div class="mk-xcard-h"><span class="mk-chg up"><span class="ms" aria-hidden="true">trending_up</span><i></i></span><div class="mk-tk-id end"><i class="mk-fig sm" style="width:45%"></i><i class="mk-line" style="width:70%"></i></div><i class="mk-brand c-cyan sm"></i></div><svg class="mk-spark up" viewBox="0 0 100 30" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="gup92" x1="0" y1="0" x2="0" y2="1"><stop class="st0" offset="0"/><stop class="st1" offset="1"/></linearGradient></defs><path class="area" d="M0.0,4.0 L4.3,2.0 L8.7,5.3 L13.0,6.3 L17.4,3.7 L21.7,10.5 L26.1,12.7 L30.4,17.0 L34.8,19.6 L39.1,20.7 L43.5,15.4 L47.8,23.2 L52.2,26.5 L56.5,28.0 L60.9,22.5 L65.2,20.0 L69.6,22.3 L73.9,25.1 L78.3,22.9 L82.6,19.4 L87.0,20.4 L91.3,21.2 L95.7,24.9 L100.0,22.1 L100,30 L0,30 Z" fill="url(#gup92)"/><path class="ln" d="M0.0,4.0 L4.3,2.0 L8.7,5.3 L13.0,6.3 L17.4,3.7 L21.7,10.5 L26.1,12.7 L30.4,17.0 L34.8,19.6 L39.1,20.7 L43.5,15.4 L47.8,23.2 L52.2,26.5 L56.5,28.0 L60.9,22.5 L65.2,20.0 L69.6,22.3 L73.9,25.1 L78.3,22.9 L82.6,19.4 L87.0,20.4 L91.3,21.2 L95.7,24.9 L100.0,22.1" pathLength="1"/></svg><div class="mk-xcard-p"><i class="mk-fig" style="width:42%"></i></div><div class="mk-xcard-f"><span class="ms fill gold" aria-hidden="true">star</span><i class="mk-alpha">α</i><i class="mk-line" style="width:30%;margin-inline-start:auto"></i></div></div><div class="mk-xcard"><div class="mk-xcard-h"><span class="mk-chg up"><span class="ms" aria-hidden="true">trending_up</span><i></i></span><div class="mk-tk-id end"><i class="mk-fig sm" style="width:45%"></i><i class="mk-line" style="width:70%"></i></div><i class="mk-brand c-ink sm"></i></div><svg class="mk-spark up" viewBox="0 0 100 30" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="gup93" x1="0" y1="0" x2="0" y2="1"><stop class="st0" offset="0"/><stop class="st1" offset="1"/></linearGradient></defs><path class="area" d="M0.0,10.9 L4.3,14.0 L8.7,18.7 L13.0,20.4 L17.4,15.4 L21.7,11.0 L26.1,8.9 L30.4,5.5 L34.8,4.0 L39.1,2.0 L43.5,4.3 L47.8,4.7 L52.2,8.4 L56.5,11.9 L60.9,3.7 L65.2,8.1 L69.6,6.3 L73.9,14.6 L78.3,13.8 L82.6,28.0 L87.0,23.7 L91.3,23.1 L95.7,24.0 L100.0,18.4 L100,30 L0,30 Z" fill="url(#gup93)"/><path class="ln" d="M0.0,10.9 L4.3,14.0 L8.7,18.7 L13.0,20.4 L17.4,15.4 L21.7,11.0 L26.1,8.9 L30.4,5.5 L34.8,4.0 L39.1,2.0 L43.5,4.3 L47.8,4.7 L52.2,8.4 L56.5,11.9 L60.9,3.7 L65.2,8.1 L69.6,6.3 L73.9,14.6 L78.3,13.8 L82.6,28.0 L87.0,23.7 L91.3,23.1 L95.7,24.0 L100.0,18.4" pathLength="1"/></svg><div class="mk-xcard-p"><i class="mk-fig" style="width:42%"></i></div><div class="mk-xcard-f"><span class="ms " aria-hidden="true">star_outline</span><i class="mk-line" style="width:30%;margin-inline-start:auto"></i></div></div><div class="mk-xcard"><div class="mk-xcard-h"><span class="mk-chg down"><span class="ms" aria-hidden="true">trending_down</span><i></i></span><div class="mk-tk-id end"><i class="mk-fig sm" style="width:45%"></i><i class="mk-line" style="width:70%"></i></div><i class="mk-brand c-violet sm"></i></div><svg class="mk-spark down" viewBox="0 0 100 30" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="gdown94" x1="0" y1="0" x2="0" y2="1"><stop class="st0" offset="0"/><stop class="st1" offset="1"/></linearGradient></defs><path class="area" d="M0.0,12.3 L4.3,13.1 L8.7,14.1 L13.0,11.0 L17.4,7.5 L21.7,7.4 L26.1,4.5 L30.4,5.8 L34.8,2.0 L39.1,9.5 L43.5,9.3 L47.8,9.5 L52.2,17.4 L56.5,14.5 L60.9,20.4 L65.2,19.1 L69.6,19.9 L73.9,21.1 L78.3,26.0 L82.6,25.3 L87.0,24.7 L91.3,23.6 L95.7,25.3 L100.0,28.0 L100,30 L0,30 Z" fill="url(#gdown94)"/><path class="ln" d="M0.0,12.3 L4.3,13.1 L8.7,14.1 L13.0,11.0 L17.4,7.5 L21.7,7.4 L26.1,4.5 L30.4,5.8 L34.8,2.0 L39.1,9.5 L43.5,9.3 L47.8,9.5 L52.2,17.4 L56.5,14.5 L60.9,20.4 L65.2,19.1 L69.6,19.9 L73.9,21.1 L78.3,26.0 L82.6,25.3 L87.0,24.7 L91.3,23.6 L95.7,25.3 L100.0,28.0" pathLength="1"/></svg><div class="mk-xcard-p"><i class="mk-fig" style="width:42%"></i></div><div class="mk-xcard-f"><span class="ms " aria-hidden="true">star_outline</span><i class="mk-alpha">α</i><i class="mk-line" style="width:30%;margin-inline-start:auto"></i></div></div><div class="mk-xcard"><div class="mk-xcard-h"><span class="mk-chg up"><span class="ms" aria-hidden="true">trending_up</span><i></i></span><div class="mk-tk-id end"><i class="mk-fig sm" style="width:45%"></i><i class="mk-line" style="width:70%"></i></div><i class="mk-brand c-teal sm"></i></div><svg class="mk-spark up" viewBox="0 0 100 30" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="gup95" x1="0" y1="0" x2="0" y2="1"><stop class="st0" offset="0"/><stop class="st1" offset="1"/></linearGradient></defs><path class="area" d="M0.0,24.3 L4.3,28.0 L8.7,23.4 L13.0,23.1 L17.4,21.2 L21.7,21.5 L26.1,23.1 L30.4,22.6 L34.8,20.9 L39.1,20.4 L43.5,20.4 L47.8,17.9 L52.2,21.4 L56.5,22.8 L60.9,20.7 L65.2,15.8 L69.6,19.0 L73.9,14.3 L78.3,15.5 L82.6,13.9 L87.0,10.1 L91.3,2.0 L95.7,5.0 L100.0,7.9 L100,30 L0,30 Z" fill="url(#gup95)"/><path class="ln" d="M0.0,24.3 L4.3,28.0 L8.7,23.4 L13.0,23.1 L17.4,21.2 L21.7,21.5 L26.1,23.1 L30.4,22.6 L34.8,20.9 L39.1,20.4 L43.5,20.4 L47.8,17.9 L52.2,21.4 L56.5,22.8 L60.9,20.7 L65.2,15.8 L69.6,19.0 L73.9,14.3 L78.3,15.5 L82.6,13.9 L87.0,10.1 L91.3,2.0 L95.7,5.0 L100.0,7.9" pathLength="1"/></svg><div class="mk-xcard-p"><i class="mk-fig" style="width:42%"></i></div><div class="mk-xcard-f"><span class="ms " aria-hidden="true">star_outline</span><i class="mk-line" style="width:30%;margin-inline-start:auto"></i></div></div></div></div></div></div>
+              <div class="body">
+                <div class="t-head"><span class="ms" aria-hidden="true">notifications_active</span><h3>Exhibition, watchlist and alerts</h3></div>
+                <p>Every listing the analysis covers in one place, with the analysts&#x27; flags. Star a listing to follow it, with alerts on your device.</p>
+                <div class="plan-tag"><span class="chip">Pro Basic: Arab markets</span><span class="chip chip-gold">Pro Elite: all markets</span></div>
+              </div>
+            </article>
+            <article class="card tile rv" style="--d:.06s">
+              <div class="shot"><div class="mk-wrap" role="img" aria-label="An illustration of Kanz Studio: a chart with a drawn trendline, a watchlist and the pattern challenges" style="aspect-ratio:16 / 9.5"><div class="mock mock-studio"><div class="mk-top"><i class="mk-logo"></i><div class="mk-tabs"><i class="mk-tab"></i><i class="mk-tab"></i><i class="mk-tab"></i><i class="mk-tab on"></i></div><span class="mk-install"><span class="ms" aria-hidden="true">install_mobile</span><i></i></span><i class="mk-icon-c"></i><i class="mk-icon-c"></i><i class="mk-avatar"></i></div><div class="mk-split three"><div class="mk-side wl"><i class="mk-fig sm" style="width:50%"></i><i class="mk-search-f"></i><div class="mk-wl"><span class="ms " aria-hidden="true">star_outline</span><div class="mk-tk-id"><i class="mk-fig sm" style="width:40%"></i><i class="mk-pct up"></i></div><i class="mk-brand c-ink xs"></i></div><div class="mk-wl"><span class="ms " aria-hidden="true">star_outline</span><div class="mk-tk-id"><i class="mk-fig sm" style="width:40%"></i><i class="mk-pct up"></i></div><i class="mk-brand c-violet xs"></i></div><div class="mk-wl me"><span class="ms fill gold" aria-hidden="true">star</span><div class="mk-tk-id"><i class="mk-fig sm" style="width:40%"></i><i class="mk-pct down"></i></div><i class="mk-brand c-teal xs"></i></div><div class="mk-wl"><span class="ms " aria-hidden="true">star_outline</span><div class="mk-tk-id"><i class="mk-fig sm" style="width:40%"></i><i class="mk-pct up"></i></div><i class="mk-brand c-amber xs"></i></div><div class="mk-wl"><span class="ms " aria-hidden="true">star_outline</span><div class="mk-tk-id"><i class="mk-fig sm" style="width:40%"></i><i class="mk-pct down"></i></div><i class="mk-brand c-sky xs"></i></div></div><div class="mk-chart"><div class="mk-tools"><span class="ms " aria-hidden="true">add</span><span class="ms " aria-hidden="true">show_chart</span><span class="ms " aria-hidden="true">straighten</span><span class="ms " aria-hidden="true">draw</span></div><svg class="mk-candles" viewBox="0 0 400 180" preserveAspectRatio="none" aria-hidden="true"><line class="wick" x1="5.9" x2="5.9" y1="61.7" y2="100.4"/><rect class="up" x="2.6" y="76.9" width="6.6" height="14.8" rx=".6"/><line class="wick" x1="17.6" x2="17.6" y1="72.6" y2="115.9"/><rect class="dn" x="14.4" y="76.9" width="6.6" height="18.9" rx=".6"/><line class="wick" x1="29.4" x2="29.4" y1="75.4" y2="104.4"/><rect class="up" x="26.1" y="88.4" width="6.6" height="7.5" rx=".6"/><line class="wick" x1="41.2" x2="41.2" y1="77.2" y2="90.4"/><rect class="dn" x="37.9" y="88.4" width="6.6" height="1.8" rx=".6"/><line class="wick" x1="52.9" x2="52.9" y1="87.9" y2="100.4"/><rect class="dn" x="49.6" y="90.1" width="6.6" height="8.0" rx=".6"/><line class="wick" x1="64.7" x2="64.7" y1="97.8" y2="117.2"/><rect class="dn" x="61.4" y="98.1" width="6.6" height="15.7" rx=".6"/><line class="wick" x1="76.5" x2="76.5" y1="81.1" y2="125.1"/><rect class="up" x="73.2" y="81.4" width="6.6" height="32.4" rx=".6"/><line class="wick" x1="88.2" x2="88.2" y1="71.3" y2="105.0"/><rect class="dn" x="84.9" y="81.4" width="6.6" height="21.4" rx=".6"/><line class="wick" x1="100.0" x2="100.0" y1="102.7" y2="124.9"/><rect class="dn" x="96.7" y="102.8" width="6.6" height="11.5" rx=".6"/><line class="wick" x1="111.8" x2="111.8" y1="102.3" y2="139.1"/><rect class="dn" x="108.5" y="114.3" width="6.6" height="7.2" rx=".6"/><line class="wick" x1="123.5" x2="123.5" y1="70.6" y2="135.5"/><rect class="up" x="120.2" y="89.3" width="6.6" height="32.1" rx=".6"/><line class="wick" x1="135.3" x2="135.3" y1="75.7" y2="100.5"/><rect class="up" x="132.0" y="83.1" width="6.6" height="6.3" rx=".6"/><line class="wick" x1="147.1" x2="147.1" y1="79.2" y2="88.7"/><rect class="up" x="143.8" y="82.2" width="6.6" height="1.2" rx=".6"/><line class="wick" x1="158.8" x2="158.8" y1="80.7" y2="102.5"/><rect class="dn" x="155.5" y="82.2" width="6.6" height="12.5" rx=".6"/><line class="wick" x1="170.6" x2="170.6" y1="48.4" y2="95.3"/><rect class="up" x="167.3" y="53.2" width="6.6" height="41.5" rx=".6"/><line class="wick" x1="182.4" x2="182.4" y1="36.8" y2="98.5"/><rect class="dn" x="179.1" y="53.2" width="6.6" height="36.2" rx=".6"/><line class="wick" x1="194.1" x2="194.1" y1="58.9" y2="93.0"/><rect class="up" x="190.8" y="68.1" width="6.6" height="21.3" rx=".6"/><line class="wick" x1="205.9" x2="205.9" y1="46.6" y2="87.0"/><rect class="dn" x="202.6" y="68.1" width="6.6" height="7.7" rx=".6"/><line class="wick" x1="217.6" x2="217.6" y1="69.8" y2="98.7"/><rect class="dn" x="214.4" y="75.8" width="6.6" height="12.0" rx=".6"/><line class="wick" x1="229.4" x2="229.4" y1="65.8" y2="88.2"/><rect class="up" x="226.1" y="77.2" width="6.6" height="10.6" rx=".6"/><line class="wick" x1="241.2" x2="241.2" y1="62.9" y2="84.4"/><rect class="up" x="237.9" y="63.7" width="6.6" height="13.5" rx=".6"/><line class="wick" x1="252.9" x2="252.9" y1="50.3" y2="122.9"/><rect class="dn" x="249.6" y="63.7" width="6.6" height="58.9" rx=".6"/><line class="wick" x1="264.7" x2="264.7" y1="116.6" y2="153.3"/><rect class="dn" x="261.4" y="122.6" width="6.6" height="28.0" rx=".6"/><line class="wick" x1="276.5" x2="276.5" y1="103.1" y2="156.2"/><rect class="up" x="273.2" y="118.3" width="6.6" height="32.3" rx=".6"/><line class="wick" x1="288.2" x2="288.2" y1="102.1" y2="133.6"/><rect class="up" x="284.9" y="108.5" width="6.6" height="9.8" rx=".6"/><line class="wick" x1="300.0" x2="300.0" y1="56.7" y2="121.3"/><rect class="up" x="296.7" y="65.6" width="6.6" height="42.9" rx=".6"/><line class="wick" x1="311.8" x2="311.8" y1="59.4" y2="85.0"/><rect class="up" x="308.5" y="64.4" width="6.6" height="1.2" rx=".6"/><line class="wick" x1="323.5" x2="323.5" y1="42.9" y2="75.5"/><rect class="up" x="320.2" y="44.8" width="6.6" height="19.6" rx=".6"/><line class="wick" x1="335.3" x2="335.3" y1="28.9" y2="76.3"/><rect class="dn" x="332.0" y="44.8" width="6.6" height="8.1" rx=".6"/><line class="wick" x1="347.1" x2="347.1" y1="23.8" y2="98.4"/><rect class="dn" x="343.8" y="52.9" width="6.6" height="26.3" rx=".6"/><line class="wick" x1="358.8" x2="358.8" y1="44.3" y2="89.2"/><rect class="up" x="355.5" y="48.0" width="6.6" height="31.2" rx=".6"/><line class="wick" x1="370.6" x2="370.6" y1="41.8" y2="65.7"/><rect class="dn" x="367.3" y="48.0" width="6.6" height="11.5" rx=".6"/><line class="wick" x1="382.4" x2="382.4" y1="41.4" y2="78.5"/><rect class="up" x="379.1" y="46.3" width="6.6" height="13.2" rx=".6"/><line class="wick" x1="394.1" x2="394.1" y1="24.1" y2="59.4"/><rect class="up" x="390.8" y="26.1" width="6.6" height="20.2" rx=".6"/><line class="draw" x1="47.1" y1="102.4" x2="364.7" y2="67.7"/><circle class="handle" cx="47.1" cy="102.4" r="4"/><circle class="handle" cx="364.7" cy="67.7" r="4"/></svg><span class="mk-pricetag" style="top:22%"></span><span class="mk-toast"><span class="ms fill" aria-hidden="true">check_circle</span><i></i></span></div><div class="mk-side"><i class="mk-gold-t"></i><span class="mk-sel"><i></i><span class="ms " aria-hidden="true">expand_more</span></span><div class="mk-xp-b"><i class="mk-line" style="width:70%"></i><span class="mk-prog"><i style="width:40%"></i></span></div><div class="mk-step"><span class="ms " aria-hidden="true">lock</span><i class="mk-line" style="width:60%"></i></div><div class="mk-step"><span class="ms " aria-hidden="true">radio_button_unchecked</span><i class="mk-line" style="width:48%"></i></div><div class="mk-step"><span class="ms " aria-hidden="true">radio_button_unchecked</span><i class="mk-line" style="width:70%"></i></div><div class="mk-step"><span class="ms " aria-hidden="true">radio_button_unchecked</span><i class="mk-line" style="width:55%"></i></div></div></div></div></div></div>
+              <div class="body">
+                <div class="t-head"><span class="ms" aria-hidden="true">sports_esports</span><h3>Kanz Studio</h3></div>
+                <p>Practice on real charts: a challenge for every chart pattern, with XP, levels and a weekly league.</p>
+                <div class="plan-tag"><span class="chip">Student and above</span><span class="chip">Drawing tool: Pro plans</span></div>
+              </div>
+            </article>
+          </div>
+          <div class="sec-actions">
+            <a class="btn" href="#plans" data-track="cta_click" data-target="plans">See the plans</a>
+            <a class="btn" href="https://radar.kanzms.com/" data-track="cta_click" data-target="radar_open">Open the Radar<span class="ms" aria-hidden="true">open_in_new</span></a>
+            <p class="fine"><span class="ms" aria-hidden="true">login</span>Already a member? Sign in with the email you use in the Kanz community on Circle.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. Method -->
+      <section class="sec sec-alt" id="method" data-section="method">
+        <div class="wrap">
+          <div class="sec-head rv">
+            <h2>How the analysis is made</h2>
+            <p class="lead">Classical technical analysis, read alongside the economy, and explained so you understand why, not only what.</p>
+          </div>
+          <div class="grid-4">
+            <article class="card feat rv"><div class="ico-box"><span class="ms" aria-hidden="true">monitoring</span></div><h3>Market analysis</h3><p>Arab and global listings and indices, read under the Classical Charting Method.</p></article>
+            <article class="card feat rv" style="--d:.05s"><div class="ico-box"><span class="ms" aria-hidden="true">visibility</span></div><h3>Clear reasoning</h3><p>Every analysis shows the level, the target and the reason, with an invalidation level to help you size your risk.</p></article>
+            <article class="card feat rv" style="--d:.1s"><div class="ico-box"><span class="ms" aria-hidden="true">school</span></div><h3>Learning by doing</h3><p>An academy and hands-on practice, so you build your own way of reading the market.</p></article>
+            <article class="card feat rv" style="--d:.15s"><div class="ico-box"><span class="ms" aria-hidden="true">forum</span></div><h3>Discussion and support</h3><p>Analysts and members discuss the market in each market&#x27;s lounge and in regular live sessions.</p></article>
+          </div>
+          <div class="callouts">
+            <div class="card callout rv"><span class="ms" aria-hidden="true">verified_user</span><p><b>Sharia compliance filter</b>The Radar has a Sharia compliance filter, so you can narrow the listings to compliant ones.</p></div>
+            <div class="card callout rv" style="--d:.05s"><span class="ms" aria-hidden="true">menu_book</span><p><b>Education, not trade calls</b>Kanz explains the chart. The decision, and its responsibility, stay with you.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. Who it is for -->
+      <section class="sec" id="who" data-section="personas">
+        <div class="wrap">
+          <div class="sec-head rv">
+            <h2>Find the plan for where you are</h2>
+          </div>
+          <div class="grid-4">
+            <article class="card persona rv">
+              <div class="ico-box"><span class="ms" aria-hidden="true">explore</span></div>
+              <h3>Just curious</h3>
+              <q>“I want to look around first”</q>
+              <p>The free community, a weekly market newsletter and an overview of market moves.</p>
+              <a class="btn btn-block" href="https://kanzms.circle.so/c/start-here/" target="_blank" rel="noopener" data-checkout-for="free" data-track="plan_click" data-plan="free" data-section="personas">Start for free</a>
+            </article>
+            <article class="card persona rv" style="--d:.05s">
+              <div class="ico-box"><span class="ms" aria-hidden="true">school</span></div>
+              <h3>Student or beginner</h3>
+              <q>“I want to learn from the start, the right way”</q>
+              <p>The Kanz Academy courses, Studio challenges and safe practice with paper trading.</p>
+              <a class="btn btn-block" href="#plans" data-checkout-for="student" data-track="plan_click" data-plan="student" data-section="personas">Student plan</a>
+            </article>
+            <article class="card persona rv" style="--d:.1s">
+              <div class="ico-box"><span class="ms" aria-hidden="true">location_on</span></div>
+              <h3>Arab markets investor</h3>
+              <q>“I invest in the Arab markets”</q>
+              <p>The Radar for Egypt, Saudi Arabia, Kuwait, the UAE and Qatar, with live follow-up during Arab-market hours.</p>
+              <a class="btn btn-block" href="#plans" data-checkout-for="basic" data-track="plan_click" data-plan="basic" data-section="personas">Pro Basic</a>
+            </article>
+            <article class="card persona top rv" style="--d:.15s">
+              <div class="ico-box"><span class="ms" aria-hidden="true">public</span></div>
+              <h3>Global and Arab markets</h3>
+              <q>“I follow global and Arab markets”</q>
+              <p>The full Radar for every market, Western-market and metals reports, and workshops with Ahmed Shaaban.</p>
+              <a class="btn btn-block" href="#plans" data-checkout-for="elite" data-track="plan_click" data-plan="elite" data-section="personas">Pro Elite</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. Academy -->
+      <section class="sec sec-alt" id="academy" data-section="academy">
+        <div class="wrap acad">
+          <div class="rv">
+            <h2>Learn step by step, then practise</h2>
+            <p class="lead">A structured path that starts from zero, in Arabic, with hands-on practice and feedback on your analysis.</p>
+            <figure>
+              <div class="frame">
+                <div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span class="url"><span class="ms">lock</span>kanzms.circle.so/c/course-level-one</span><span class="spacer"></span></div>
+                <div class="mk-wrap" role="img" aria-label="An illustration of the Level 1 course in the Kanz Academy on Circle" style="aspect-ratio:16 / 10"><div class="mock mock-course"><div class="mk-c-top"><i class="mk-c-title"></i></div><div class="mk-course"><div class="mk-c-head"><i class="mk-c-h1"></i><div class="mk-c-meta"><i class="mk-line" style="width:14%"></i><i class="mk-line" style="width:12%"></i><i class="mk-line" style="width:16%"></i></div></div><div class="mk-module"><i class="mk-line" style="width:22%"></i><i class="mk-line t" style="width:9%"></i><span class="ms " aria-hidden="true">expand_less</span></div><div class="mk-lesson"><span class="ms " aria-hidden="true">radio_button_unchecked</span><i class="mk-thumb"></i><i class="mk-line" style="width:30%"></i><i class="mk-line t" style="width:7%"></i></div><div class="mk-module"><i class="mk-line" style="width:34%"></i><i class="mk-line t" style="width:9%"></i><span class="ms " aria-hidden="true">expand_less</span></div><div class="mk-lesson"><span class="ms fill" aria-hidden="true">check_circle</span><i class="mk-thumb"></i><i class="mk-line" style="width:62%"></i><i class="mk-line t" style="width:7%"></i></div><div class="mk-lesson"><span class="ms fill" aria-hidden="true">check_circle</span><i class="mk-thumb"></i><i class="mk-line" style="width:48%"></i><i class="mk-line t" style="width:7%"></i></div><div class="mk-lesson"><span class="ms fill" aria-hidden="true">check_circle</span><i class="mk-thumb"></i><i class="mk-line" style="width:70%"></i><i class="mk-line t" style="width:7%"></i></div><div class="mk-lesson"><span class="ms fill" aria-hidden="true">check_circle</span><i class="mk-thumb"></i><i class="mk-line" style="width:55%"></i><i class="mk-line t" style="width:7%"></i></div><div class="mk-lesson"><span class="ms " aria-hidden="true">radio_button_unchecked</span><i class="mk-thumb"></i><i class="mk-line" style="width:66%"></i><i class="mk-line t" style="width:7%"></i></div><div class="mk-lesson"><span class="ms " aria-hidden="true">radio_button_unchecked</span><i class="mk-thumb"></i><i class="mk-line" style="width:40%"></i><i class="mk-line t" style="width:7%"></i></div></div></div></div>
+              </div>
+              <figcaption class="frame-cap"><span class="ms" aria-hidden="true">auto_awesome_mosaic</span>An illustration of the Level 1 course on Circle.</figcaption>
+            </figure>
+          </div>
+          <div>
+            <ol class="steps">
+              <li class="step rv"><span class="n">1</span><div class="s-body"><b>Placement test</b><span class="d">Start at the level that fits you.</span></div></li>
+              <li class="step rv"><span class="n">2</span><div class="s-body"><b>Level 1 course</b><span class="d">The full foundation in the Kanz Academy.</span></div></li>
+              <li class="step rv"><span class="n">3</span><div class="s-body"><b>Level 2 course</b><span class="d">Out now, in the Academy for Student and above at no extra cost.</span></div></li>
+              <li class="step rv"><span class="n">4</span><div class="s-body"><b>Kanz Studio</b><span class="d">Challenges on real charts, XP, levels and a weekly league.</span></div></li>
+              <li class="step rv"><span class="n">5</span><div class="s-body"><b>Paper trading and feedback</b><span class="d">Practise what you learn and share your charts for the analysts to review.</span></div></li>
+              <li class="step rv"><span class="n">6</span><div class="s-body"><b>Practical lessons library</b><span class="d">Applied lessons, open in full from Pro Basic.</span></div></li>
+            </ol>
+            <div class="sec-actions">
+              <a class="btn" href="#plans" data-checkout-for="student" data-track="plan_click" data-plan="student" data-section="academy">Start with the Student plan<span class="ms flip nudge" aria-hidden="true">arrow_forward</span></a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. Plans -->
+      <section class="sec" id="plans" data-section="plans">
+        <div class="wrap" data-plans data-plans-api="https://pay.kanzms.com/api/site-plans">
+          <div class="sec-head center rv">
+            <h2>Choose the plan for your stage</h2>
+            <p class="lead">Start for free, then move to the plan that covers the markets you follow.</p>
+          </div>
+          <div class="plan-bar">
+            <div class="seg" role="radiogroup" aria-label="Billing period" data-period-group><button type="button" role="radio" aria-checked="false" data-period="monthly">Monthly<span class="save" data-save-for="monthly" hidden></span></button><button type="button" role="radio" aria-checked="false" data-period="quarterly">Quarterly<span class="save" data-save-for="quarterly" hidden></span></button><button type="button" role="radio" aria-checked="false" data-period="semiannual">6 months<span class="save" data-save-for="semiannual" hidden></span></button><button type="button" role="radio" aria-checked="false" data-period="annual">Yearly<span class="save" data-save-for="annual" hidden></span></button></div>
+          </div>
+          <p class="fine plans-note" data-cur-note="EGP" hidden>Prices in Egyptian pounds. Pay with InstaPay or a mobile wallet: activated within 24 hours at most, with no automatic renewal.</p>
+          <p class="fine plans-note" data-cur-note="USD" hidden>Prices in US dollars. Pay by card on Circle&#x27;s secure checkout: your content opens as soon as you pay.</p>
+          <div class="plans">
+            <article class="card plan rv" data-tier="free" id="plan-free" aria-labelledby="pn-free">
+              <span class="kicker">To start</span>
+              <h3 id="pn-free">Free</h3>
+              <span class="alt" lang="ar">الباقة المجانية</span>
+              <p class="scope"><span class="ms" aria-hidden="true">groups</span><span>The public community</span></p>
+              <p class="desc">Start your journey in the markets at no cost: basic learning content and an overview of market moves.</p>
+              <div class="price"><span class="amt">0</span></div>
+              <div class="price-sub">Always free</div>
+              <a class="btn btn-block cta" href="https://kanzms.circle.so/c/start-here/" target="_blank" rel="noopener" data-checkout data-track="plan_click" data-plan="free">Start for free</a>
+              <ul><li><span class="ms" aria-hidden="true">check</span><span>A free weekly market newsletter</span></li><li><span class="ms" aria-hidden="true">check</span><span>Selected introductory learning content</span></li><li><span class="ms" aria-hidden="true">check</span><span>Access to the public community</span></li><li><span class="ms" aria-hidden="true">check</span><span>An overview of market moves</span></li></ul>
+            </article>
+            <article class="card plan rv" style="--d:.05s" data-tier="student" id="plan-student" aria-labelledby="pn-student">
+              <span class="kicker">For beginners</span>
+              <h3 id="pn-student">Student</h3>
+              <span class="alt" lang="ar">باقة الطالب</span>
+              <p class="scope"><span class="ms" aria-hidden="true">school</span><span>Kanz Academy: learn and practise</span></p>
+              <p class="desc">A strong, practical foundation that prepares you to enter real markets with confidence, built for beginners.</p>
+              <div class="price"><span class="amt ltr" data-amt><span class="skel" aria-hidden="true"></span><span class="sr">Loading prices</span></span><span class="per" data-cur></span><span class="per" data-per></span></div>
+              <div class="price-sub" data-sub></div>
+              <a class="btn btn-block cta" href="https://pay.kanzms.com/?plan=student" data-checkout data-track="plan_click" data-plan="student">Subscribe<span class="ms" aria-hidden="true">open_in_new</span></a>
+              <ul><li><span class="ms" aria-hidden="true">check</span><span>Kanz Academy: the Level 1 and Level 2 courses</span></li><li><span class="ms" aria-hidden="true">check</span><span>Kanz Studio: challenges on real charts, with XP, levels and a weekly league</span></li><li><span class="ms" aria-hidden="true">check</span><span>Safe, hands-on practice with paper trading</span></li><li><span class="ms" aria-hidden="true">check</span><span>Follow real performance analysis step by step</span></li><li><span class="ms" aria-hidden="true">check</span><span>A space to share your analysis and charts and get feedback</span></li><li><span class="ms" aria-hidden="true">check</span><span>An active student community for questions and shared experience</span></li></ul>
+            </article>
+            <article class="card plan rv" style="--d:.1s" data-tier="basic" id="plan-basic" aria-labelledby="pn-basic">
+              <span class="kicker">Professional</span>
+              <h3 id="pn-basic">Pro Basic</h3>
+              <span class="alt" lang="ar">نخبة برو الأساسية</span>
+              <p class="scope"><span class="ms" aria-hidden="true">location_on</span><span>Arab markets: Egypt · Saudi Arabia · Kuwait · UAE · Qatar</span></p>
+              <p class="desc">Professional analysis and live follow-up for the Arab markets: enter the market with real tools.</p>
+              <div class="price"><span class="amt ltr" data-amt><span class="skel" aria-hidden="true"></span><span class="sr">Loading prices</span></span><span class="per" data-cur></span><span class="per" data-per></span></div>
+              <div class="price-sub" data-sub></div>
+              <a class="btn btn-block cta" href="https://pay.kanzms.com/?plan=basic" data-checkout data-track="plan_click" data-plan="basic">Subscribe<span class="ms" aria-hidden="true">open_in_new</span></a>
+              <ul><li><span class="ms" aria-hidden="true">check</span><span>Everything in Student, with full access to the courses and the lessons library</span></li><li><span class="ms" aria-hidden="true">check</span><span>The Market Radar for the Arab markets</span></li><li><span class="ms" aria-hidden="true">check</span><span>The drawing tool in Kanz Studio, on the Radar&#x27;s listings</span></li><li><span class="ms" aria-hidden="true">check</span><span>Track your portfolios on the dashboard, with import from your broker statement</span></li><li><span class="ms" aria-hidden="true">check</span><span>Daily live follow-up with the analysts during Arab-market hours</span></li><li><span class="ms" aria-hidden="true">check</span><span>One-to-one meetings with the analysts</span></li><li><span class="ms" aria-hidden="true">check</span><span>Weekly breakout reports for the Arab markets</span></li><li><span class="ms" aria-hidden="true">check</span><span>Macroeconomics reports when events affect your markets</span></li><li><span class="ms" aria-hidden="true">check</span><span>Crypto market analysis<small>Not available in Egypt or in countries that ban crypto. The user bears full responsibility.</small></span></li></ul>
+            </article>
+            <article class="card plan featured rv" style="--d:.15s" data-tier="elite" id="plan-elite" aria-labelledby="pn-elite">
+              <span class="badge"><span class="ms fill" aria-hidden="true">workspace_premium</span>Most complete</span>
+              <span class="kicker">Every market</span>
+              <h3 id="pn-elite">Pro Elite</h3>
+              <span class="alt" lang="ar">نخبة برو المتقدمة</span>
+              <p class="scope"><span class="ms" aria-hidden="true">public</span><span>All global and Arab markets</span></p>
+              <p class="desc">The highest level at Kanz: full coverage of every market, with no limits.</p>
+              <div class="price"><span class="amt ltr" data-amt><span class="skel" aria-hidden="true"></span><span class="sr">Loading prices</span></span><span class="per" data-cur></span><span class="per" data-per></span></div>
+              <div class="price-sub" data-sub></div>
+              <a class="btn btn-block cta btn-gold" href="https://pay.kanzms.com/?plan=elite" data-checkout data-track="plan_click" data-plan="elite">Subscribe<span class="ms" aria-hidden="true">open_in_new</span></a>
+              <ul><li><span class="ms" aria-hidden="true">check</span><span>Everything in Pro Basic, with no limits</span></li><li><span class="ms" aria-hidden="true">check</span><span>The full Market Radar: global and Arab markets</span></li><li><span class="ms" aria-hidden="true">check</span><span>The global markets space in the Kanz community</span></li><li><span class="ms" aria-hidden="true">check</span><span>Western-market breakout reports and metals reports</span></li><li><span class="ms" aria-hidden="true">check</span><span>Live workshops with Ahmed Shaaban, and direct contact with him</span></li><li><span class="ms" aria-hidden="true">check</span><span>Live follow-up across all global market hours</span></li><li><span class="ms" aria-hidden="true">check</span><span>Full, ongoing Macroeconomics coverage of every market</span></li><li><span class="ms" aria-hidden="true">check</span><span>A seat in the Elite community and priority at the closed monthly meetups</span></li><li><span class="ms" aria-hidden="true">check</span><span>Crypto and metals analysis<small>Crypto analysis is not available in Egypt. The user bears full responsibility.</small></span></li></ul>
+            </article>
+          </div>
+          <div class="trust-row">
+            <span><span class="ms" aria-hidden="true">account_balance_wallet</span>InstaPay, a mobile wallet or a card</span>
+            <span><span class="ms" aria-hidden="true">event_repeat</span>Egyptian-pound plans never renew automatically</span>
+            <span><span class="ms" aria-hidden="true">menu_book</span>Educational content, not investment advice</span>
+          </div>
+          <p class="fine plans-note">Plans and prices are the same as on the plans page, <a class="link" href="https://pay.kanzms.com/" data-track="cta_click" data-target="paywall">pay.kanzms.com</a>. All content is for educational purposes only and is not investment advice.</p>
+        </div>
+      </section>
+
+      <!-- 7. Team -->
+      <section class="sec sec-alt" id="team" data-section="team">
+        <div class="wrap">
+          <div class="sec-head rv">
+            <h2>The person behind the analysis</h2>
+          </div>
+          <article class="card person rv">
+            <div class="photo"><img src="assets/shaabaan.webp" alt="Ahmed Shaaban, CEO of Kanz" width="720" height="900" loading="lazy" /></div>
+            <div>
+              <h3>Ahmed Shaaban</h3>
+              <p class="role">CEO</p>
+              <p>Experience across global equities and commodities. He managed a partnership portfolio worth $145 million at American Express and ran an equity advisory account at Charles Schwab.</p>
+              <p>He combines classical technical analysis with a macroeconomic view and disciplined risk management, and hosts the weekly live workshop.</p>
+              <div class="creds">
+                <div class="cred"><b class="ltr">$145M</b><span>Partnership portfolio managed at American Express</span></div>
+                <div class="cred"><b class="words">Charles Schwab</b><span>Ran an equity advisory account</span></div>
+                <div class="cred"><b class="words">Every Thursday</b><span>Hosts the live market workshop</span></div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- 8. Workshops -->
+      <section class="sec" id="workshops" data-section="workshops">
+        <div class="wrap">
+          <div class="sec-head rv">
+            <h2>Live every Thursday with Ahmed Shaaban</h2>
+            <p class="lead">Ahmed Shaaban and the team review the markets live and answer questions, on Circle and on X.</p>
+          </div>
+          <div class="ws">
+            <article class="card ws-next rv" data-next-workshop>
+              <span class="ws-label"><span class="live-dot" aria-hidden="true"></span>Next workshop</span>
+              <time class="ws-when" data-when>Every Thursday evening</time>
+              <p class="fine" data-local hidden>in your time · Cairo time: <span class="mono" data-cairo></span></p>
+              <div class="ws-meta"><span class="chip"><span class="ms" aria-hidden="true">videocam</span>Live on Circle</span><span class="chip"><span class="ms" aria-hidden="true">videocam</span>Live on X @RealKnzMS</span></div>
+              <p data-topic hidden></p>
+              <p class="fine">The topic is announced in the community before each workshop.</p>
+              <div class="sec-actions" style="margin-top:8px">
+                <a class="btn btn-gold" href="https://kanzms.circle.so/c/start-here/" target="_blank" rel="noopener" data-track="cta_click" data-target="free_community">Join the free community to attend</a>
+                <a class="btn" href="https://x.com/RealKnzMS" target="_blank" rel="noopener" data-track="social_click" data-platform="x" data-section="workshops"><svg class="bm" aria-hidden="true"><use href="#b-x"/></svg>Follow on X</a>
+              </div>
+            </article>
+            <article class="card ws-past rv" style="--d:.06s">
+              <h3><span class="ms" aria-hidden="true">history</span>Recent topics</h3>
+              <ol>
+                <li><time datetime="2026-10-08">8 Oct</time><span>Yields, bonds and the end of the year</span></li>
+                <li><time datetime="2026-10-01">1 Oct</time><span>The last months of the year and big-company earnings</span></li>
+                <li><time datetime="2026-09-24">24 Sep</time><span>The year&#x27;s end: what awaits the markets?</span></li>
+                <li><time datetime="2026-09-03">3 Sep</time><span>Market volatility and the risks ahead</span></li>
+                <li><time datetime="2026-08-13">13 Aug</time><span>Gold and metals wake up, and a read on the markets ahead</span></li>
+                <li><time datetime="2026-08-06">6 Aug</time><span>Where are global markets heading?</span></li>
+              </ol>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Social feed -->
+      <section class="sec sec-alt" id="feed" data-section="feed">
+        <div class="wrap">
+          <div class="sec-head rv">
+            <h2>From our TikTok and X</h2>
+            <p class="lead">Short market explainers and our latest posts, straight from our accounts.</p>
+          </div>
+          <div class="feed">
+            <div class="card feed-col">
+              <div class="feed-head"><svg class="bm" aria-hidden="true"><use href="#b-tiktok"/></svg><b>TikTok</b><span class="fine ltr">@kanzms</span>
+                <a class="btn btn-sm" href="https://www.tiktok.com/@kanzms" target="_blank" rel="noopener" data-track="social_click" data-platform="tiktok" data-section="feed">Open TikTok<span class="ms" aria-hidden="true">open_in_new</span></a></div>
+              <div class="embed-slot" data-embed="tiktok"><p class="embed-wait"><span class="skel" aria-hidden="true"></span><span class="skel" aria-hidden="true"></span>Loading the latest posts</p><template data-markup><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@kanzms" data-unique-id="kanzms" data-embed-type="creator" style="max-width:780px;min-width:288px;"><section><a target="_blank" rel="noopener" href="https://www.tiktok.com/@kanzms?refer=creator_embed">@kanzms</a></section></blockquote></template><template data-fallback><div class="fallback"><div class="av"><img src="assets/logo.png" alt="" width="46" height="46" /></div><b class="ltr">@kanzms</b><p>Short videos on reading the markets.</p><a class="btn" href="https://www.tiktok.com/@kanzms" target="_blank" rel="noopener" data-track="social_click" data-platform="tiktok" data-section="feed_fallback"><svg class="bm" aria-hidden="true"><use href="#b-tiktok"/></svg>Watch on TikTok</a></div></template></div>
+            </div>
+            <div class="card feed-col">
+              <div class="feed-head"><svg class="bm" aria-hidden="true"><use href="#b-x"/></svg><b>X</b><span class="fine ltr">@RealKnzMS</span>
+                <a class="btn btn-sm" href="https://x.com/RealKnzMS" target="_blank" rel="noopener" data-track="social_click" data-platform="x" data-section="feed">Open X<span class="ms" aria-hidden="true">open_in_new</span></a></div>
+              <div class="embed-slot" data-embed="x"><p class="embed-wait"><span class="skel" aria-hidden="true"></span><span class="skel" aria-hidden="true"></span>Loading the latest posts</p><template data-markup><div class="x-posts" data-x-posts></div></template><template data-fallback><div class="fallback"><div class="av"><img src="assets/logo.png" alt="" width="46" height="46" /></div><b class="ltr">@RealKnzMS</b><p>Posts and live workshops from the Kanz team.</p><a class="btn" href="https://x.com/RealKnzMS" target="_blank" rel="noopener" data-track="social_click" data-platform="x" data-section="feed_fallback"><svg class="bm" aria-hidden="true"><use href="#b-x"/></svg>See the posts on X</a></div></template></div>
+            </div>
+          </div>
+          <p class="fine" style="margin-top:16px">These feeds load from TikTok and X when you reach this section. See the <a class="link" href="https://staging.kanzms-bgw.pages.dev/en/privacy.html#embeds">privacy policy</a>.</p>
+        </div>
+      </section>
+
+      <!-- 9. FAQ -->
+      <section class="sec" id="faq" data-section="faq">
+        <div class="wrap">
+          <div class="sec-head center rv">
+            <h2>Before you subscribe</h2>
+          </div>
+          <div class="faq">
+            <details class="card" data-q="radar"><summary>What is the Kanz Radar, and how do I sign in?<span class="ms" aria-hidden="true">add</span></summary><div class="a"><p>The Radar is Kanz&#x27;s web app at radar.kanzms.com: the Exhibition, Pulse, a page for every listing, your watchlist and Kanz Studio. Sign in with the email you use in the Kanz community on Circle. What you see depends on your plan.</p></div></details>
+            <details class="card" data-q="student"><summary>Who is the Student plan for?<span class="ms" aria-hidden="true">add</span></summary><div class="a"><p>Beginners who want to learn: the Level 1 and Level 2 courses, Kanz Studio challenges, practice with paper trading and a space to get feedback on your charts. The Radar&#x27;s market analysis starts with Pro Basic.</p></div></details>
+            <details class="card" data-q="egp"><summary>How does paying in Egyptian pounds work, and does it renew?<span class="ms" aria-hidden="true">add</span></summary><div class="a"><p>Choose a plan and a period, then pay with InstaPay or a mobile wallet; your plan is activated within 24 hours at most. It does not renew automatically: to continue, pay for the next period before yours ends.</p></div></details>
+            <details class="card" data-q="usd"><summary>How do I pay in dollars?<span class="ms" aria-hidden="true">add</span></summary><div class="a"><p>&quot;Subscribe&quot; takes you to the plan&#x27;s checkout page on Circle, the platform the Kanz community runs on. You choose the period there and pay by card, and your content opens once the payment goes through. You manage your subscription from your Circle account.</p></div></details>
+            <details class="card" data-q="diff"><summary>What&#x27;s the difference between Pro Basic and Pro Elite?<span class="ms" aria-hidden="true">add</span></summary><div class="a"><p>Pro Basic covers the Arab markets (Egypt, Saudi Arabia, Kuwait, the UAE and Qatar), with daily live follow-up during Arab-market hours and one-to-one meetings with the analysts. Pro Elite adds the global markets, the global markets space, Western-market and metals reports, the Elite workshops with Ahmed Shaaban, and follow-up across global market hours.</p></div></details>
+            <details class="card" data-q="circle"><summary>Do I need a Circle account?<span class="ms" aria-hidden="true">add</span></summary><div class="a"><p>Yes. The Kanz community, the Academy, the reports and the lounges all live on Circle, and your subscription is tied to the email you use there. If you don&#x27;t have one, you can create it for free when you join the free community.</p></div></details>
+            <details class="card" data-q="advice"><summary>Does Kanz give investment recommendations?<span class="ms" aria-hidden="true">add</span></summary><div class="a"><p>No. Kanz provides technical analysis for educational and informational purposes under the Classical Charting Method. It is not financial advice. The investment decision, and its responsibility, rests with the subscriber.</p></div></details>
+          </div>
+          <div class="faq-more">
+            <a class="btn" href="https://staging.kanzms-bgw.pages.dev/en/faq.html" data-track="cta_click" data-target="faq_page">All questions</a>
+            <a class="btn" href="https://staging.kanzms-bgw.pages.dev/en/contact.html" data-track="cta_click" data-target="contact">Contact us</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Closing call -->
+      <section class="closer" data-section="closer">
+        <div class="wrap">
+          <div class="closer-card rv">
+            <img src="assets/logo.png" alt="" width="56" height="56" />
+            <h2>Start for free, then choose the markets you follow</h2>
+            <p class="lead">The free community, a weekly market newsletter and the live Thursday workshop are open to everyone.</p>
+            <div class="hero-ctas">
+              <a class="btn btn-gold btn-lg" href="#plans" data-track="cta_click" data-target="plans">See the plans<span class="ms flip nudge" aria-hidden="true">arrow_forward</span></a>
+              <a class="btn btn-lg" href="https://kanzms.circle.so/c/start-here/" target="_blank" rel="noopener" data-track="cta_click" data-target="free_community">Explore the free community</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="ftr">
+      <div class="wrap">
+        <div class="ftr-grid">
+          <div>
+            <a class="brand" href="#top"><img src="assets/logo.png" alt="" width="34" height="34" /><span>Kanz</span></a>
+            <p class="about">Market reading and technical analysis education for Arab investors.</p>
+            <div class="socials">
+              <a href="https://www.tiktok.com/@kanzms" target="_blank" rel="noopener" aria-label="Kanz on TikTok" data-track="social_click" data-platform="tiktok" data-section="footer"><svg class="bm" aria-hidden="true"><use href="#b-tiktok"/></svg></a>
+              <a href="https://x.com/RealKnzMS" target="_blank" rel="noopener" aria-label="Kanz on X" data-track="social_click" data-platform="x" data-section="footer"><svg class="bm" aria-hidden="true"><use href="#b-x"/></svg></a>
+              <a href="https://www.instagram.com/realknzms" target="_blank" rel="noopener" aria-label="Kanz on Instagram" data-track="social_click" data-platform="instagram" data-section="footer"><svg class="bm" aria-hidden="true"><use href="#b-instagram"/></svg></a>
+              <a href="https://www.facebook.com/realknzms" target="_blank" rel="noopener" aria-label="Kanz on Facebook" data-track="social_click" data-platform="facebook" data-section="footer"><svg class="bm" aria-hidden="true"><use href="#b-facebook"/></svg></a>
+            </div>
+          </div>
+          <div><h4>Kanz</h4><ul>
+            <li><a href="#inside">What you get</a></li>
+            <li><a href="https://staging.kanzms-bgw.pages.dev/en/pricing.html">Plans</a></li>
+            <li><a href="#academy">Academy</a></li>
+            <li><a href="#workshops">Workshops</a></li>
+            <li><a href="https://staging.kanzms-bgw.pages.dev/en/blog/index.html">Blog</a></li>
+            <li><a href="https://staging.kanzms-bgw.pages.dev/en/faq.html">FAQ</a></li>
+          </ul></div>
+          <div><h4>Company</h4><ul>
+            <li><a href="https://staging.kanzms-bgw.pages.dev/en/about.html">About</a></li>
+            <li><a href="https://staging.kanzms-bgw.pages.dev/en/contact.html">Contact</a></li>
+            <li><a href="https://radar.kanzms.com/">Sign in to the Radar</a></li>
+          </ul></div>
+          <div><h4>Legal</h4><ul>
+            <li><a href="https://staging.kanzms-bgw.pages.dev/en/terms.html">Terms</a></li>
+            <li><a href="https://staging.kanzms-bgw.pages.dev/en/privacy.html">Privacy</a></li>
+            <li><a href="https://staging.kanzms-bgw.pages.dev/en/refund.html">Refunds</a></li>
+          </ul></div>
+        </div>
+        <p class="disclaimer"><span class="ms" aria-hidden="true">info</span><span>All published material is for educational purposes only and does not constitute investment or financial advice. Members are responsible for their own investment decisions.</span></p>
+        <div class="ftr-base">
+          <span>© <span data-year>2026</span> Kanz. All rights reserved.</span>
+          <a href="https://staging.kanzms-bgw.pages.dev/index.html" hreflang="ar" lang="ar"><span class="ms" aria-hidden="true">translate</span>العربية</a>
+        </div>
+      </div>
+    </footer>
+
+    <div class="dock" data-dock aria-hidden="true">
+      <span class="t"><b>Choose your plan</b>Start for free, then choose your markets</span>
+      <a class="btn btn-gold btn-sm" href="#plans" tabindex="-1" data-track="cta_click" data-section="dock" data-target="plans">See the plans</a>
+    </div>
+
+    <script src="assets/site.js" defer></script>
+  </body>
+</html>
