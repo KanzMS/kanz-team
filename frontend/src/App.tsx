@@ -3,6 +3,7 @@ import { Icon } from "./components";
 import { siteUrl } from "./lib/api";
 import { DocsPage } from "./pages/Docs";
 import { LibraryPage } from "./pages/Library";
+import { MarketClosePage } from "./pages/MarketClose";
 import { TemplatesPage } from "./pages/Templates";
 import { WorkshopCtaPage } from "./pages/WorkshopCta";
 
@@ -30,6 +31,10 @@ function Header() {
             <Icon name="gif_box" />
             Workshop CTA
           </NavLink>
+          <NavLink to="/market-close" className="nav-link">
+            <Icon name="candlestick_chart" />
+            Market close
+          </NavLink>
           <a href={siteUrl("website/")} className="nav-link">
             <Icon name="language" />
             Website
@@ -52,6 +57,8 @@ export function App() {
           <Route path="/templates" element={<TemplatesPage />} />
           <Route path="/templates/:slug" element={<TemplatesPage />} />
           <Route path="/workshop-cta" element={<WorkshopCtaPage />} />
+          <Route path="/market-close" element={<MarketClosePage />} />
+          <Route path="/market-close/:slug" element={<MarketClosePage />} />
           <Route path="*" element={<Navigate to="/library" replace />} />
         </Routes>
       </main>

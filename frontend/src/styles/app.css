@@ -143,7 +143,8 @@ p { text-wrap: pretty; }
   margin-inline-end: 8px;
 }
 .brand img { display: block; width: 36px; height: 36px; }
-.header-nav { display: flex; align-items: center; gap: 4px; min-width: 0; }
+.header-nav { display: flex; align-items: center; gap: 4px; min-width: 0; overflow-x: auto; scrollbar-width: none; }
+.header-nav::-webkit-scrollbar { display: none; }
 .nav-link {
   display: inline-flex;
   align-items: center;
@@ -784,4 +785,55 @@ textarea.input { resize: none; min-height: 40px; line-height: 1.6; field-sizing:
   .ad-view { padding: 16px; }
   .ad-download-actions { width: 100%; }
   .ad-download-actions .pill { flex: 1; justify-content: center; }
+}
+
+/* ── Market close: the reels and posts from Egy-to-tokyo-automation ─────── */
+.mc-switch { display: flex; flex-wrap: wrap; gap: 8px 12px; }
+.mc-option { display: inline-flex; align-items: center; gap: 6px; }
+.mc-option .material-symbols-outlined { font-size: 16px; }
+.segmented-option[aria-current="page"] { color: var(--text-high); background: var(--surface-cont-high); box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4); }
+.mc-title { font-family: "IBM Plex Sans Arabic", "Cairo", sans-serif; font-size: 24px; font-weight: 700; color: var(--text-high); text-align: start; }
+/* Arabic text, lined up with the English around it. */
+.mc-title, .mc-date { text-align: left; }
+.mc-title + .page-sub { margin-block-start: 2px; }
+
+.mc-reel { display: grid; grid-template-columns: minmax(0, 340px) minmax(0, 1fr); gap: 24px; align-items: start; }
+.mc-video { display: block; width: 100%; aspect-ratio: 9 / 16; background: var(--surface); border: 1px solid var(--border-medium); border-radius: 12px; }
+.mc-side { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; padding: 18px 20px 8px; }
+.mc-side-head { width: 100%; padding-block-end: 14px; border-block-end: 1px solid var(--border-subtle); }
+.mc-date { font-family: "IBM Plex Sans Arabic", "Cairo", sans-serif; font-size: 16px; font-weight: 600; color: var(--text-high); }
+.mc-date-en { margin-block-start: 2px; font-size: 12px; color: var(--text-low); }
+.mc-note { display: flex; align-items: center; gap: 6px; padding: 6px 10px; font-size: 12.5px; color: var(--text-mid); background: var(--fill-subtle); border: 1px solid var(--border-subtle); border-radius: 8px; }
+.mc-note .material-symbols-outlined { font-size: 16px; color: var(--text-low); }
+.mc-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.mc-table td { padding: 9px 0; border-block-end: 1px solid var(--border-subtle); color: var(--text-mid); font-family: "IBM Plex Sans Arabic", "Cairo", sans-serif; }
+.mc-table tr:last-child td { border-block-end: 0; }
+.mc-table td.mono { font-family: "JetBrains Mono", monospace; text-align: left; font-weight: 500; white-space: nowrap; padding-inline-start: 12px; }
+.mc-table .is-up { color: var(--text-high); }
+.mc-table .is-down { color: var(--error); }
+.mc-table .is-off { color: var(--text-low); }
+
+.mc-post-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px; margin-block-end: 14px; }
+.mc-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.mc-post-head + .mc-note { margin-block-end: 14px; align-self: flex-start; width: fit-content; }
+.mc-shots { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 220px); gap: 16px; align-items: start; }
+.mc-shot { display: block; overflow: hidden; background: var(--surface); border: 1px solid var(--border-medium); border-radius: 12px; transition: border-color var(--motion-quick) var(--ease-out); }
+.mc-shot:hover { border-color: var(--border-hover); }
+.mc-shot:focus-visible { outline-offset: 3px; }
+.mc-shot img { display: block; width: 100%; height: auto; }
+
+.mc-archive { display: flex; flex-direction: column; overflow: hidden; }
+.mc-archive-row { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-block-end: 1px solid var(--border-subtle); transition: background-color var(--motion-quick) var(--ease-out); }
+.mc-archive-row:last-child { border-block-end: 0; }
+.mc-archive-row:hover { background: var(--fill-subtle); }
+.mc-archive-row:focus-visible { outline-offset: -3px; }
+.mc-archive-name { flex: 1; min-width: 0; font-size: 14px; font-weight: 500; color: var(--text-high); font-family: "IBM Plex Sans Arabic", "Cairo", sans-serif; }
+.mc-archive-meta { font-size: 12px; color: var(--text-low); white-space: nowrap; }
+.mc-archive-row .material-symbols-outlined { font-size: 18px; color: var(--text-low); }
+.mc-archive-empty { padding: 14px; font-size: 14px; color: var(--text-low); }
+
+@media (max-width: 760px) {
+  .mc-reel { grid-template-columns: 1fr; }
+  .mc-video { max-width: 340px; }
+  .mc-shots { grid-template-columns: minmax(0, 1fr) minmax(0, 120px); gap: 10px; }
 }
