@@ -787,7 +787,7 @@ textarea.input { resize: none; min-height: 40px; line-height: 1.6; field-sizing:
   .ad-download-actions .pill { flex: 1; justify-content: center; }
 }
 
-/* ── Market close: the reels and posts from Egy-to-tokyo-automation ─────── */
+/* ── Market close: the reels from Egy-to-tokyo-automation ───────────────── */
 .mc-switch { display: flex; flex-wrap: wrap; gap: 8px 12px; }
 .mc-option { display: inline-flex; align-items: center; gap: 6px; }
 .mc-option .material-symbols-outlined { font-size: 16px; }
@@ -813,15 +813,6 @@ textarea.input { resize: none; min-height: 40px; line-height: 1.6; field-sizing:
 .mc-table .is-down { color: var(--error); }
 .mc-table .is-off { color: var(--text-low); }
 
-.mc-post-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px; margin-block-end: 14px; }
-.mc-actions { display: flex; flex-wrap: wrap; gap: 8px; }
-.mc-post-head + .mc-note { margin-block-end: 14px; align-self: flex-start; width: fit-content; }
-.mc-shots { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 220px); gap: 16px; align-items: start; }
-.mc-shot { display: block; overflow: hidden; background: var(--surface); border: 1px solid var(--border-medium); border-radius: 12px; transition: border-color var(--motion-quick) var(--ease-out); }
-.mc-shot:hover { border-color: var(--border-hover); }
-.mc-shot:focus-visible { outline-offset: 3px; }
-.mc-shot img { display: block; width: 100%; height: auto; }
-
 .mc-archive { display: flex; flex-direction: column; overflow: hidden; }
 .mc-archive-row { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-block-end: 1px solid var(--border-subtle); transition: background-color var(--motion-quick) var(--ease-out); }
 .mc-archive-row:last-child { border-block-end: 0; }
@@ -835,5 +826,4 @@ textarea.input { resize: none; min-height: 40px; line-height: 1.6; field-sizing:
 @media (max-width: 760px) {
   .mc-reel { grid-template-columns: 1fr; }
   .mc-video { max-width: 340px; }
-  .mc-shots { grid-template-columns: minmax(0, 1fr) minmax(0, 120px); gap: 10px; }
 }

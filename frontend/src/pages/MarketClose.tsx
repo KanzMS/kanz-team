@@ -3,33 +3,21 @@ import { Navigate, NavLink, useParams } from "react-router-dom";
 import { ErrorState, Icon } from "../components";
 import { ApiError } from "../lib/api";
 
-/* The daily market-close reels and close posts. They are made in the cloud by
+/* The daily market-close reels. They are made in the cloud by
    youssef-massoudL/Egy-to-tokyo-automation and published on its GitHub Pages
-   site, which this page reads: <SOURCE><folder>/latest.json for a reel,
-   <SOURCE>posts/<market>/latest.json for a post, and the repo's public releases
-   for the days before. */
+   site, which this page reads: <SOURCE><folder>/latest.json for the latest
+   reel, and the repo's public releases for the days before. */
 const SOURCE = "https://youssef-massoudl.github.io/Egy-to-tokyo-automation/";
 const RELEASES = "https://api.github.com/repos/youssef-massoudL/Egy-to-tokyo-automation/releases?per_page=100";
 
-type View = { slug: string; group: "reels" | "posts"; label: string; title: string; summary: string; folder: string };
+type View = { slug: string; label: string; title: string; summary: string; folder: string };
 
 const VIEWS: View[] = [
-  { slug: "cairo-to-tokyo", group: "reels", label: "Cairo to Tokyo", title: "من القاهرة لطوكيو",
+  { slug: "cairo-to-tokyo", label: "Cairo to Tokyo", title: "من القاهرة لطوكيو",
     summary: "Egypt, the Gulf and Asia at the close, every trading day.", folder: "egx" },
-  { slug: "europe-to-new-york", group: "reels", label: "Europe to New York", title: "من أوروبا لنيويورك",
+  { slug: "europe-to-new-york", label: "Europe to New York", title: "من أوروبا لنيويورك",
     summary: "Europe and the US at the close, every trading day.", folder: "us" },
-  { slug: "saudi", group: "posts", label: "Saudi", title: "السوق السعودية",
-    summary: "TASI and four sub-indices, after the Tadawul close, Sunday to Thursday.", folder: "tasi" },
-  { slug: "egypt", group: "posts", label: "Egypt", title: "البورصة المصرية",
-    summary: "EGX30 and four indices, after the EGX close, Sunday to Thursday.", folder: "egx" },
-  { slug: "us", group: "posts", label: "US", title: "السوق الأمريكية",
-    summary: "S&P 500, Dow Jones and Nasdaq 100 in one post, after the New York close, Monday to Friday.", folder: "us" },
 ];
-const GROUPS = [
-  { id: "reels", label: "Reels", icon: "movie" },
-  { id: "posts", label: "Close posts", icon: "image" },
-] as const;
-
 const NAMES: Record<string, string> = {
   egx30: "EGX30 · مصر", tasi: "تاسي · السعودية", dfmgi: "سوق دبي", fadgi: "فوتسي أبوظبي", nifty: "نيفتي 50 · الهند",
   hsi: "هانج سنج · هونج كونج", kospi: "كوسبي 200 · كوريا", n225: "نيكاي 225 · اليابان", dax: "داكس · ألمانيا",
@@ -44,7 +32,6 @@ const NOTES: Record<string, string> = {
 
 type Reel = { date: string; date_ar: string; weekday: string; status: string; file: string;
   rows: { key: string; pct: number; closed?: boolean }[] };
-type Post = { date: string; date_ar: string; status: string; files: { wide: string; tall: string } };
 type Release = { tag_name: string; name: string; draft: boolean;
   assets: { name: string; size: number; browser_download_url: string }[] };
 
@@ -139,22 +126,19 @@ function Missing({ what }: { what: string }) {
   );
 }
 
-function Archive({ prefix, ext, kind }: { prefix: string; ext: string; kind: string }) {
-  const items = useReleases(prefix, ext);
+function Archive({ prefix }: { prefix: string }) {
+  const items = useReleases(prefix, ".mp4");
   return (
     <section className="section">
       <h2 className="section-title">Earlier days</h2>
       <div className="panel mc-archive">
         {items === "loading" && <span className="skeleton" style={{ height: 44, margin: 12 }} />}
         {items === "error" && <p className="mc-archive-empty">The archive didn't load. Reload the page to try again.</p>}
-        {Array.isArray(items) && items.length === 0 && <p className="mc-archive-empty">No earlier {kind} yet.</p>}
+        {Array.isArray(items) && items.length === 0 && <p className="mc-archive-empty">No earlier reels yet.</p>}
         {Array.isArray(items) && items.map(({ release, asset }) => (
           <a key={asset.browser_download_url} className="mc-archive-row" href={asset.browser_download_url}>
-            <span className="mc-archive-name" dir="auto">
-              {release.name}
-              {ext === ".png" && <span className="mono"> · {asset.name.includes("_wide") ? "16:9" : "9:16"}</span>}
-            </span>
-            <span className="mc-archive-meta mono">{(asset.size / 1e6).toFixed(1)} MB · {ext.slice(1).toUpperCase()}</span>
+            <span className="mc-archive-name" dir="auto">{release.name}</span>
+            <span className="mc-archive-meta mono">{(asset.size / 1e6).toFixed(1)} MB · MP4</span>
             <Icon name="download" />
           </a>
         ))}
@@ -196,46 +180,7 @@ function ReelView({ view }: { view: View }) {
           </div>
         </div>
       )}
-      <Archive prefix={`${view.folder}-`} ext=".mp4" kind="reels" />
-    </>
-  );
-}
-
-function PostView({ view }: { view: View }) {
-  const base = `${SOURCE}posts/${view.folder}/`;
-  const post = useRemote<Post>(`${base}latest.json`);
-  return (
-    <>
-      {post.status === "loading" && <div className="mc-shots section"><span className="skeleton" style={{ aspectRatio: "16 / 9" }} /><span className="skeleton" style={{ aspectRatio: "9 / 16" }} /></div>}
-      {post.status === "error" && <div className="section"><ErrorState error={post.error} retry={post.retry} /></div>}
-      {post.status === "missing" && <div className="section"><Missing what="post" /></div>}
-      {post.status === "ready" && (() => {
-        const v = encodeURIComponent(post.data.date);
-        return (
-          <div className="section">
-            <div className="mc-post-head">
-              <div>
-                <p className="mc-date" dir="auto">{post.data.date_ar}</p>
-                <p className="mc-date-en mono">{post.data.date}</p>
-              </div>
-              <div className="mc-actions">
-                <DownloadButton primary url={`${base}wide.png?v=${v}`} filename={post.data.files.wide} label="16:9 PNG" />
-                <DownloadButton url={`${base}tall.png?v=${v}`} filename={post.data.files.tall} label="9:16 PNG" />
-              </div>
-            </div>
-            <Note status={post.data.status} />
-            <div className="mc-shots">
-              {(["wide", "tall"] as const).map((k) => (
-                <a key={k} className="mc-shot" href={`${base}${k}.png?v=${v}`} target="_blank" rel="noopener"
-                  aria-label={`${view.label} ${k === "wide" ? "16:9" : "9:16"}, full size`}>
-                  <img src={`${base}${k}.jpg?v=${v}`} alt="" loading="lazy" />
-                </a>
-              ))}
-            </div>
-          </div>
-        );
-      })()}
-      <Archive prefix={`post-${view.folder}-`} ext=".png" kind="posts" />
+      <Archive prefix={`${view.folder}-`} />
     </>
   );
 }
@@ -244,25 +189,15 @@ export function MarketClosePage() {
   const { slug } = useParams();
   const view = VIEWS.find((v) => v.slug === slug);
   if (!view) return <Navigate to={`/market-close/${VIEWS[0].slug}`} replace />;
-  const first = (group: string) => VIEWS.find((v) => v.group === group)!.slug;
 
   return (
     <div className="page">
       <h1 className="page-title">Market close</h1>
-      <p className="page-sub">The reels and close posts, made automatically after each market closes.</p>
+      <p className="page-sub">The daily close reels, made automatically after the markets close.</p>
 
       <div className="mc-switch section">
-        <nav className="segmented" aria-label="Kind">
-          {GROUPS.map((g) => (
-            <NavLink key={g.id} to={`/market-close/${first(g.id)}`} className="segmented-option mc-option"
-              aria-current={view.group === g.id ? "page" : undefined}>
-              <Icon name={g.icon} />
-              {g.label}
-            </NavLink>
-          ))}
-        </nav>
-        <nav className="segmented" aria-label={view.group === "reels" ? "Reel" : "Market"}>
-          {VIEWS.filter((v) => v.group === view.group).map((v) => (
+        <nav className="segmented" aria-label="Reel">
+          {VIEWS.map((v) => (
             <NavLink key={v.slug} to={`/market-close/${v.slug}`} className="segmented-option mc-option">
               {v.label}
             </NavLink>
@@ -275,7 +210,7 @@ export function MarketClosePage() {
         <p className="page-sub">{view.summary}</p>
       </div>
 
-      {view.group === "reels" ? <ReelView key={view.slug} view={view} /> : <PostView key={view.slug} view={view} />}
+      <ReelView key={view.slug} view={view} />
     </div>
   );
 }

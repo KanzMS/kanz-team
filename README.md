@@ -41,7 +41,7 @@ Add the file to `content/` and push to `dev`. When running locally, restart `npm
 
 ## Market close
 
-The **Market close** tab shows the daily close reels (Cairo to Tokyo, Europe to New York) and close posts (Saudi, Egypt, US). They are made automatically in youssef-massoudL/Egy-to-tokyo-automation and read from its site, https://youssef-massoudl.github.io/Egy-to-tokyo-automation/, so nothing is stored here. The days before come from that repo's public releases.
+The **Market close** tab shows the daily close reels (Cairo to Tokyo, Europe to New York). They are made automatically in youssef-massoudL/Egy-to-tokyo-automation and read from its site, https://youssef-massoudl.github.io/Egy-to-tokyo-automation/, so nothing is stored here. The days before come from that repo's public releases.
 
 ## Copying
 
